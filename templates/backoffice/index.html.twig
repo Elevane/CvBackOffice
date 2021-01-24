@@ -1,0 +1,145 @@
+{% extends 'base_backoffice.html.twig' %}
+{% block body %}
+
+    <section id="body">
+        <h1>Back office
+            {%  if api_status == false %}
+                <span style="color: red" id="dot">.</span>
+            {%  else %}
+                <span style="color: green" id="dot">.</span>
+            {% endif %}
+
+
+        </h1>
+        <section id="bo_skills" class="bo_sections">
+            <h2> Skills</h2>
+            <article>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nom</th>
+                        <th>ratio</th>
+                        <th>actif</th>
+                        <th>Outils</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in skills %}
+                        <tr>
+                            <td style="color:black;">{{ t.id }}</td>
+                            <td style="color:black;">{{ t.name }}</td>
+                            <td id="rangeTd" style="color:black;"><input type="range" min="0" max="5" step="1" value="{{ t.ratio / 5 }}" disabled> <p>{{ t.ratio / 5 }}</p></td>
+                            <td style="color:black;"><input type="checkbox" id="{{ t.id }}"
+                                        {% if  t.active == 1  %}
+                                            checked
+                                        {% endif %}
+                                >
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_skill_edit', { id :  t.id }) }}" class="editBtn"><img  src="img/edit.png"></a>
+                                <a href="{{ path('admin_skill_delete', { id :  t.id }) }}" class="delBtn"><img  src="img/del.png"></a>
+                            </td>
+
+
+                        </tr>
+
+                    {% endfor %}
+                    <tr id="trSkillForm">
+                        {{ form_start(form) }}
+                        <td style="color:black;">Ajout</td>
+                        <td>
+                           {{ form_widget(form.name) }}
+                        </td>
+                        <td id="rangeTd">
+                            <div style="display: none">{{ form_widget(form.ratio) }}</div>
+                            <input id="range" type="range" min="0" max="5" step="1" value="0">
+                            <p id="valeurDuRange">0</p>
+                        </td>
+                        <td>
+                            {{ form_widget(form.active) }}
+                        </td>
+                        <td id="skill_submit">
+                            {{ form_widget(form.submit, { 'label': '+' }) }}
+                        </td>
+                        {{ form_end(form) }}
+                    </tr>
+                    </tbody>
+                </table>
+
+            </article>
+
+        </section>
+        <section id="bo_projects" class="bo_sections">
+            <h2> Projects</h2>
+            <article>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>image</th>
+                        <th>nom</th>
+                        <th>technos</th>
+                        <th>Outils</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in projects %}
+                        <tr>
+                            <td style="color:black;">{{ t.id }}</td>
+                            <td style="color:black;">{{ t.img }}</td>
+                            <td style="color:black;">{{ t.name }}</td>
+                            <td style="color:black;">{{ t.technos }}</td>
+                            <td><a href="{{ path('admin_project_edit', { id :  t.id }) }}" class="editBtn"><img  src="img/edit.png"></a></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section id="bo_blogs" class="bo_sections">
+            <h2> Blogs</h2>
+            <article>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>date</th>
+                        <th>titre</th>
+                        <th>image</th>
+                        <th>texte</th>
+                        <th>Outils</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in blogs %}
+                        <tr>
+                            <td style="color:black;">{{ t.id }}</td>
+                            <td style="color:black;">{{ t.date |format('Y-m-d') }}</td>
+                            <td style="color:black;">{{ t.title }}</td>
+                            <td style="color:black;">{{ t.image }}</td>
+                            <td style="color:black;">{{ t.text }}</td>
+                            <td>
+                                <a href="{{ path('admin_blog_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
+                                <a href="{{ path('admin_blog_delete', { id :  t.id }) }}" class="delBtn"><img  src="css/img/del.png"></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('admin_blog_new') }}">new</a>
+            </article>
+        </section>
+
+            <a id="btnDc" href="{{ path('admin_logout') }}">deconnecter</a>
+
+    </section>
+
+{% endblock %}
+
+
+

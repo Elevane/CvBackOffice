@@ -14,7 +14,7 @@
         <section id="bo_skills" class="bo_sections">
             <h2> Skills</h2>
             <article>
-                <table>
+                <table  cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -60,7 +60,7 @@
                         <td>
                             {{ form_widget(form.active) }}
                         </td>
-                        <td id="skill_submit">
+                        <td >
                             {{ form_widget(form.submit, { 'label': '+' }) }}
                         </td>
                         {{ form_end(form) }}
@@ -74,12 +74,12 @@
         <section id="bo_projects" class="bo_sections">
             <h2> Projects</h2>
             <article>
-                <table>
+                <table  cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
-                        <th>image</th>
                         <th>nom</th>
+                        <th>image</th>
                         <th>technos</th>
                         <th>Outils</th>
                     </tr>
@@ -88,8 +88,8 @@
                     {% for t in projects %}
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
-                            <td style="color:black;">{{ t.image }}</td>
                             <td style="color:black;">{{ t.name }}</td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img class="backoffice_index_img"src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.skills }}</td>
                             <td><a href="{{ path('admin_project_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
                             <a href="{{ path('admin_project_delete', { id :  t.id }) }}" class="delBtn"><img  src="css/img/del.png"></a></td>
@@ -98,20 +98,20 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{{ path('admin_project_new') }}">new</a>
+                <a class="backoffice_index_button_new" href="{{ path('admin_project_new') }}">Ajouter</a>
             </article>
         </section>
 
         <section id="bo_blogs" class="bo_sections">
             <h2> Blogs</h2>
             <article>
-                <table>
+                <table  cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
-                        <th>date</th>
                         <th>titre</th>
                         <th>image</th>
+                        <th>date</th>
                         <th>texte</th>
                         <th>Outils</th>
                     </tr>
@@ -120,9 +120,9 @@
                     {% for t in blogs %}
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
-                            <td style="color:black;">{{ t.date |format('Y-m-d') }}</td>
                             <td style="color:black;">{{ t.title }}</td>
-                            <td style="color:black;">{{ t.image }}</td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img class="backoffice_index_img"src="{{ t.image }}"></td>
+                            <td style="color:black;">{{ t.date |format('Y-m-d') }}</td>
                             <td style="color:black;">{{ t.text }}</td>
                             <td>
                                 <a href="{{ path('admin_blog_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
@@ -133,7 +133,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{{ path('admin_blog_new') }}">new</a>
+                <a class="backoffice_index_button_new"href="{{ path('admin_blog_new') }}">Ajouter</a>
             </article>
         </section>
 

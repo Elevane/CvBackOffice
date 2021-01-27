@@ -40,10 +40,10 @@ class ProjectController extends BaseBackOfficeController{
 
             return $this->redirectToRoute('admin_index');
         }
-        return $this->render('/backoffice/project/new.html.twig',[
+        return $this->render('/backoffice/project/new_or_edit.html.twig',[
             "form" => $form->createView(),
             'skills' => $skills,
-            "title" => "Creation d'un article de project",
+            "title" => "Creation d'un  project",
         ]);
     }
 
@@ -87,7 +87,7 @@ class ProjectController extends BaseBackOfficeController{
             return $this->redirectToRoute('admin_index');
         }
 
-        return $this->render('backoffice/project/new.html.twig', [
+        return $this->render('backoffice/project/new_or_edit.html.twig', [
             'project' => $api_project,
             "skills" => $skills,
             'form' => $form->createView(),

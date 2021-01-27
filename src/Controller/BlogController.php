@@ -38,7 +38,7 @@ class BlogController extends BaseBackOfficeController{
 
             return $this->redirectToRoute('admin_index');
         }
-        return $this->render('/backoffice/blog/new.html.twig',[
+        return $this->render('/backoffice/blog/new_or_edit.html.twig',[
             "form" => $form->createView(),
             "title" => "Creation d'un article de blog",
         ]);

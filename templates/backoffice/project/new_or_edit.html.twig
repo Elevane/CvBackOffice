@@ -6,10 +6,10 @@
     <section id="body">
         <h1>Back office</h1>
         <section class=" bo_edit">
-            <h2>{{ title }}</h2>
+            <h2 class="backoffice_edit_h2">{{ title }}</h2>
             {{ form_start(form) }}
-            <div >{{ form_widget(form.skills) }}</div>
-            <div>
+            <div hidden >{{ form_widget(form.skills) }}</div>
+            <div class="backoffice_edit_div_skills">
                 <label for="skills_add">Technos</label>
                 <select id="skills_add" name="skills_add" >
                     <option value="choose">ajouter un skill</option>
@@ -19,7 +19,22 @@
                 </select>
                 <div id="skills_buttons"></div>
             </div>
+
+            <div class="backoffice_edit_div_image">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image) }}
+
+            </div>
+            <div class="backoffice_edit_div_name">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="backoffice_edit_div_buttons">
+                <button><a href="{{ path('admin_index') }}">Annuler</a></button>
+                {{ form_widget(form.submit) }}
+            </div>
             {{ form_end(form) }}
+
         </section>
     </section>
     <script>

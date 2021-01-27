@@ -21,7 +21,7 @@ if($('#project_skills').val() != null){
                 $('#project_skills').val(  hiddenSkill + " ");
             }
             $('#skills_add option[value=' + skills[i] + ']').remove();
-            $('#skills_buttons').append('<button type="button" id="'+skills[i]+'" class="buttons">'+ skills[i]+'</button>');
+            $('#skills_buttons').append('<button type="button" id="'+skills[i]+'" class="backoffice_edit_skills_buttons">'+ skills[i]+'</button>');
         }
     }
 
@@ -32,7 +32,7 @@ $('#skills_add').on('change', function (){
 
     if(this.value !== "choose"){
         var skill = $('#skills_add').val();
-        $('#skills_buttons').append('<button type="button" id="'+skill+'" class="buttons">'+ skill+'</button>');
+        $('#skills_buttons').append('<button type="button" id="'+skill+'" class="backoffice_edit_skills_buttons">'+ skill+'</button>');
         $('#skills_add option:selected').hide();
         var hiddenSkill = $('#project_skills').val();
         $('#project_skills').val(  hiddenSkill += skill + " ");

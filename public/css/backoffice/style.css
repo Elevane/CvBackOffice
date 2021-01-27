@@ -13,13 +13,20 @@ IMPORTS
     padding: 0;
     box-shadow: none;
     font-family: 'tomorrow','Roboto', sans-serif;
-    color:#18171B;
+    color: #264653;
+}
+a{
+    text-decoration: none;
 }
 html{
     background: #E2E1E0;
 }
-h1, a, label, input{
-    color:#18171B;
+h1,  label, input{
+    color: #264653;
+}
+table{
+    border: none;
+    margin-bottom: 0.5%;
 }
 #btnDc{
     text-decoration: none;
@@ -28,7 +35,7 @@ h1, a, label, input{
     border: 1px solid #8a8a8a;
 }
 #btnDc:hover{
-    background-color: #14213d;
+    background-color:  #264653;
     color: white;
 }
 body{
@@ -93,13 +100,18 @@ h2{
     font-family: 'Tomorrow', 'Roboto', sans-serif;
     width: 100%;
     padding: 0.5%;
-    background-color: #14213d;
+    background-color: #264653;
     display: flex;
     color: #E2E1E0;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     border-top-left-radius:10px;
+}
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 article, form{
     padding: 0.5%;
@@ -123,7 +135,7 @@ article table{
 
  th{
      padding: 1.5%;
-     background: #98c1d9;
+     background: #2a9d8f;
      color: white;
      text-align: left;
  }
@@ -134,9 +146,10 @@ article table{
  }
 
  .editBtn img, .delBtn img, .delBtn{
-     width: 30px;
-     height: 30px;
+     width: 15px;
+     height: 15px;
      border:none;
+
  }
 
  .text_blog{
@@ -145,13 +158,75 @@ article table{
      overflow: hidden;
      text-overflow: unset;
  }
-
+.backoffice_edit_h2{
+    padding-right: 5%;
+    padding-left: 5%;
+}
 .bo_edit{
-    width: 50%;
+    width: 40%;
     height: 100%;
+
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 5%;
+
+}
+#skills_buttons{
+    width: 50%;
+    margin-left: 1%;
+    display: flex;
+}
+.backoffice_edit_div_buttons a{
+    margin-top: 2%;
+    border: none;
+}
+.backoffice_edit_div_buttons button{
+    margin-right: 2%;
+    margin-top: 2%;
+    padding: 0.5%;
+}
+.backoffice_edit_skills_buttons, .backoffice_edit_div_buttons button{
+    border: transparent;
+    margin: 1%;
+    width: 20%;
+    height: 33%;
+    background-color:  #264653;
+    color:  #E2E1E0;
+    border-radius: 3px;
+
+}
+.backoffice_edit_div_buttons a{
+    border: none;
+    color: #E2E1E0;
+}
+.backoffice_edit_div_buttons a:hover{
+    color:  #264653;
+}
+.backoffice_edit_skills_buttons:hover, .backoffice_edit_div_buttons button:hover{
+    background-color:#E2E1E0 ;
+    color:  #264653;
+    border: 1px solid  #264653;
+}
+
+
+.backoffice_edit_div_skills, .backoffice_edit_div_name{
+    display: flex;
+
+}
+.backoffice_edit_div_image label, .backoffice_edit_div_skills label, .backoffice_edit_div_name label{
+    margin-right: 5%;
+}
+.backoffice_edit_div_image {
+    display: flex;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.backoffice_edit_div_skills select, .backoffice_edit_div_name input{
+    width: 20%;
+    margin-bottom: 1%;
+}
+.bo_edit form{
+    padding: 5%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -161,18 +236,17 @@ article table{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    color: black;
+    color:  #264653;
 }
 
 input[type=text], select {
-    width: 100%;
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-
 }
 
 #add_skill{
@@ -181,18 +255,31 @@ input[type=text], select {
 #skill_submit{
    margin-left: 35%;
 }
-#skill_submit button:hover{
-
-
-    background-color: #14213d;
+#skill_submit {
+    background-color:  #264653;
     color: #E2E1E0;
+    border: transparent;
+    padding: 5%;
+    border-radius: 3px;
+}
+#skill_submit:hover{
+
+    border: solid 1px #264653;
+    background-color:  #E2E1E0;
+    color: #264653;
+}
+.backoffice_index_img{
+    width: 50%;
+}
+.backoffice_index_td_img{
+    width: 20%;
 }
 #skill_submit button{
-    border: 1px solid #14213d;
+    border: 1px solid  #264653;
     padding: 8%;
     border-radius: 3px;
     background-color: #E2E1E0;
-    color: #14213d;
+    color: #264653;
 }
 
 #rangeTd{
@@ -201,7 +288,7 @@ input[type=text], select {
     margin-top: 10%;
 }
 #rangeTd p, .divEditForm p{
-    color: black;
+    color:  #264653;
 }
 
 .divEditForm{
@@ -221,10 +308,18 @@ input[type=text], select {
 #checkboxEdit label{
     margin-right: 2%;
 }
-#skills_buttons{
-    width: 5%;
+
+
+.backoffice_index_button_new{
+    text-decoration: none;
+    padding: 0.5%;
+    background-color: #264653;
+    color: #E2E1E0;
+   text-align: center;
+    border-radius: 3px;
 }
 
-.submit_button{
-
+.backoffice_index_button_new:hover{
+    background-color:#E2E1E0 ;
+    color: #264653;
 }

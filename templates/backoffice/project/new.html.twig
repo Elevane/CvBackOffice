@@ -1,0 +1,29 @@
+
+
+
+{% extends 'base_backoffice.html.twig' %}
+{% block body %}
+    <section id="body">
+        <h1>Back office</h1>
+        <section class=" bo_edit">
+            <h2>{{ title }}</h2>
+            {{ form_start(form) }}
+            <div >{{ form_widget(form.skills) }}</div>
+            <div>
+                <label for="skills_add">Technos</label>
+                <select id="skills_add" name="skills_add" >
+                    <option value="choose">ajouter un skill</option>
+                    {% for t in skills %}
+                        <option value="{{ t.name }}">{{ t.name }}</option>
+                    {% endfor %}
+                </select>
+                <div id="skills_buttons"></div>
+            </div>
+            {{ form_end(form) }}
+        </section>
+    </section>
+    <script>
+
+
+    </script>
+{% endblock %}

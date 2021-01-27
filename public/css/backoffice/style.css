@@ -181,9 +181,18 @@ input[type=text], select {
 #skill_submit{
    margin-left: 35%;
 }
+#skill_submit button:hover{
+
+
+    background-color: #14213d;
+    color: #E2E1E0;
+}
 #skill_submit button{
-    color: black;
-    padding: 5%;
+    border: 1px solid #14213d;
+    padding: 8%;
+    border-radius: 3px;
+    background-color: #E2E1E0;
+    color: #14213d;
 }
 
 #rangeTd{
@@ -211,4 +220,11 @@ input[type=text], select {
 }
 #checkboxEdit label{
     margin-right: 2%;
+}
+#skills_buttons{
+    width: 5%;
+}
+
+.submit_button{
+
 }

@@ -4,8 +4,9 @@
 namespace App\Form;
 
 
-use App\Entity\Projet;
+use App\Entity\Project;
 use App\Entity\User;
+use PhpParser\Node\Scalar\MagicConst\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,16 +19,16 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image', TextType::class)
-            ->add('nom', TextType::class)
-            ->add('technos', TextType::class)
+            ->add('image', FileType::class, ['required' => false])
+            ->add('name', TextType::class)
+            ->add('skills', TextType::class)
             ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Projet::class,
+            'data_class' => Project::class,
         ]);
     }
 }

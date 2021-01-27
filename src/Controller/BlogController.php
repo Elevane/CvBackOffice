@@ -8,6 +8,8 @@ use App\Entity\Blog;
 
 use App\Form\BlogType;
 
+use DateTime;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,19 +55,26 @@ class BlogController extends BaseBackOfficeController{
         $blog = new Blog();
         $api_blog = $this->service->getBlog($id);
         if($api_blog){
-            dump($api_blog['date']);
-            exit();
+
             $blog ->setId($api_blog['id']);
-            $blog ->setImage($api_blog['image']);
-            $blog ->setDate($api_blog['date']);
+            $blog ->setImage(new File($api_blog['image']));
+            $blog ->setDate(new DateTime($api_blog['date']));
             $blog ->setText($api_blog['text']);
             $blog->setTitle($api_blog['title']);
-
-            $form =$this->createForm(BlogType::class,$blog );
+            $form =$this->createForm(BlogType::class, $blog );
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
-
-
+                $file = $form['image']->getData();
+                if($file != null){
+                    $filename = $file->getClientOriginalName();
+                    $path = "image/blog/";
+                    $pathFileName = $path . $filename;
+                    $blog->setImage($pathFileName);
+                    $file->move($path, $filename );
+                }
+                else{
+                    $blog->setImage($api_blog['image']);
+                }
                 $this->service->editBlog($blog) ;
                 return $this->redirectToRoute('admin_index');
             }
@@ -90,9 +99,9 @@ class BlogController extends BaseBackOfficeController{
      */
     public function deleteAction(int $id): RedirectResponse
     {
-        $blog = $this->service->getBlog($id);
+        $blog = $this->service->getProject($id);
         if($blog) {
-            $this->service->deleteBlog($id);
+            $this->service->deleteProject($id);
             return $this->redirectToRoute('admin_index');
         }
         return $this->redirectToRoute('admin_index');

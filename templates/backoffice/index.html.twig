@@ -38,8 +38,8 @@
                                 >
                             </td>
                             <td>
-                                <a href="{{ path('admin_skill_edit', { id :  t.id }) }}" class="editBtn"><img  src="img/edit.png"></a>
-                                <a href="{{ path('admin_skill_delete', { id :  t.id }) }}" class="delBtn"><img  src="img/del.png"></a>
+                                <a href="{{ path('admin_skill_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
+                                <a href="{{ path('admin_skill_delete', { id :  t.id }) }}" class="delBtn"><img  src="css//img/del.png"></a>
                             </td>
 
 
@@ -88,15 +88,17 @@
                     {% for t in projects %}
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
-                            <td style="color:black;">{{ t.img }}</td>
+                            <td style="color:black;">{{ t.image }}</td>
                             <td style="color:black;">{{ t.name }}</td>
-                            <td style="color:black;">{{ t.technos }}</td>
-                            <td><a href="{{ path('admin_project_edit', { id :  t.id }) }}" class="editBtn"><img  src="img/edit.png"></a></td>
+                            <td style="color:black;">{{ t.skills }}</td>
+                            <td><a href="{{ path('admin_project_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
+                            <a href="{{ path('admin_project_delete', { id :  t.id }) }}" class="delBtn"><img  src="css/img/del.png"></a></td>
                         </tr>
 
                     {% endfor %}
                     </tbody>
                 </table>
+                <a href="{{ path('admin_project_new') }}">new</a>
             </article>
         </section>
 

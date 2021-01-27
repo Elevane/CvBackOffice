@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Projet;
+use App\Entity\Project;
 use App\Entity\Skill;
 use App\Form\ProjectType;
 use App\Form\SkillType;
@@ -31,7 +31,7 @@ class BackOfficeController extends BaseBackOfficeController
     {
             $status = true;
             $skills = $this->service->getSkills();
-            $projets = $this->service->getProjets();
+            $projets = $this->service->getProjects();
             $blogs = $this->service->getBlogs();
             if(count($blogs) < 1 && count($projets) <1 && count($skills) <1){
                 $status = false;
@@ -63,14 +63,14 @@ class BackOfficeController extends BaseBackOfficeController
      */
     public function editAction(Request $request, int $id){
 
-        $projet = new Projet();
-        $api_projet = $this->service->getProjet($id);
+        $projet = new Project();
+        $api_projet = $this->service->getProject($id);
         if($api_projet){
 
             $projet->setId($api_projet['id']);
             $projet->setImage($api_projet['img']);
-            $projet->setNom($api_projet['name']);
-            $projet->setTechnos($api_projet['technos']);
+            $projet->setName($api_projet['name']);
+            $projet->setSkills($api_projet['technos']);
             $form =$this->createForm(ProjectType::class, $projet);
 
 
@@ -78,13 +78,13 @@ class BackOfficeController extends BaseBackOfficeController
             if($form->isSubmitted() && $form->isValid()){
                 $data = $form->getData();
                 $projet->setImage($data['image']);
-                $projet->setTechnos($data['technos']);
-                $projet->setNom($data['nom']);
+                $projet->setSkills($data['technos']);
+                $projet->setName($data['nom']);
 
             }
-            return $this->render('backoffice/projet/edit.html.twig', ['editform' => $form->createView(),
-                'projet' => $api_projet,
-                'title' => 'Modification du Projet : '. $projet->getNom(),
+            return $this->render('backoffice/project/edit.html.twig', ['editform' => $form->createView(),
+                'project' => $api_projet,
+                'title' => 'Modification du Project : '. $projet->getName(),
             ]);
         }
 

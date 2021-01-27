@@ -4,6 +4,7 @@
 namespace App\Service;
 
 use App\Entity\Blog;
+use App\Entity\Project;
 use App\Entity\Skill;
 use App\Generic\Constants;
 use App\Entity\User;
@@ -31,7 +32,7 @@ class ApiService{
     }
 
 
-    public function getProjet(int $id){
+    public function getProject(int $id){
         $content = [];
         try {
             $response = $this->client->request(
@@ -100,14 +101,14 @@ class ApiService{
 
         return $content;
     }
-    public function getProjets():array
+    public function getProjects():array
     {
        
         $content = [];
         try {
             $response = $this->client->request(
                 'GET',
-                "http://127.0.0.1:5000/projet"
+                "http://127.0.0.1:5000/project"
             );
 
             $statusCode = $response->getStatusCode();
@@ -267,6 +268,29 @@ class ApiService{
         }
         return true;
     }
+
+    public function editProject(Project $project){
+
+        try {
+            $response = $this->client->request(
+                'PATCH',
+                "http://127.0.0.1:5000/project",[
+                    'json' => $project->toJsonId(),]
+            );
+
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+    }
     public function deleteBlog(int $id){
         try {
             $response = $this->client->request(
@@ -289,6 +313,30 @@ class ApiService{
 
     }
 
+    public function deleteProject(int $id){
+        try {
+            $response = $this->client->request(
+                'DELETE',
+                "http://127.0.0.1:5000/project/". $id
+            );
+
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+
+    }
+
+
+
 
 
     public function newBlog(Blog $blog){
@@ -298,6 +346,28 @@ class ApiService{
                 'POST',
                 "http://127.0.0.1:5000/blog",[
                     'json' => $blog->toJson(),]
+            );
+
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
+        } catch (\Throwable $th) {
+            echo $th;
+        }
+    }
+
+    public function newProject(Project $project){
+
+        try {
+            $response = $this->client->request(
+                'POST',
+                "http://127.0.0.1:5000/project",[
+                    'json' => $project->toJson(),]
             );
 
             $statusCode = $response->getStatusCode();

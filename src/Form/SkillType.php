@@ -20,7 +20,11 @@ class SkillType extends AbstractType
             ->add('name', TextType::class)
             ->add('ratio', TextType::class)
             ->add('active', CheckboxType::class, ['required' => false])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'submit_button'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

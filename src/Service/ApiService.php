@@ -158,12 +158,12 @@ class ApiService{
     public function getUserByUsername($username, $password)
     {
        
-        $content = [];
+
         try {
             $response = $this->client->request(
                 'POST',
                 "http://127.0.0.1:5000/getuser",[
-                'json' => ['username' => $username, 'password' => $password ],]
+                'json' => ['username' => $username, 'password' => $password ]]
             );
 
             $statusCode = $response->getStatusCode();
@@ -174,15 +174,22 @@ class ApiService{
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
        
         $array = $response->toArray();
-        } catch (\Throwable $th) {
-           echo $th;
-        }
-        
 
-        $user =$this->serializer->deserialize($content, User::class, 'json');
-        
-        
-        return $user;
+
+        } catch (\Throwable $th) {
+           $res =  "Could not connect to the server";
+           return $res;
+        }
+
+
+        if(empty($array)){
+            $res = false;
+        }
+        else{
+            $res = true;
+        }
+
+        return $res;
     }
     public function newSkill(Skill $skill){
         try {

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\LoginType;
+use App\Service\ApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     private $session;
+    private $service;
+    private $error = "";
 
     /**
      * @param SessionInterface $session
      */
-    public function __construct(SessionInterface $session){
+    public function __construct(SessionInterface $session, ApiService $service){
         $this->session = $session;
+        $this->service = $service;
     }
 
 
@@ -29,29 +33,24 @@ class SecurityController extends AbstractController
      */
     public function login(Request $request): Response
     {
-        if($this->isLogged()){
-            return $this->redirectToRoute('admin_index');
-        }
-        else{
-
-            $error = '';
             $user = new User();
             $form = $this->createForm(LoginType::class, $user);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $data = $form->getData();
-                if ($this->checkCredentials()) {
+
+                if ($this->checkCredentials($user)) {
                     $this->AddUserTosession($user);
                     return $this->redirectToRoute('admin_index');
 
-                } else {
-
-                    $error = 'User doesnt exist';
                 }
             }
 
-            return $this->render('security/login.html.twig', ['form' => $form->createView(), 'errors' => $error]);
-        }
+            return $this->render('backoffice/security/login.html.twig', [
+                'form' => $form->createView(),
+                'error' => $this->error,
+                'title' => "Se Connecter"
+            ]);
+
     }
 
     /**
@@ -60,6 +59,7 @@ class SecurityController extends AbstractController
     public function logout(): Response
     {
         $this->session->clear();
+
         return $this->redirectToRoute('admin_login');
     }
 
@@ -72,23 +72,42 @@ class SecurityController extends AbstractController
         }
     }
 
-    public function checkCredentials()
+    public function checkCredentials($user)
     {
-        return true;
+        if($user != null &&  $this->session->get('user') == null){
+
+            $log = $this->service->getUserByUsername( $user->getLogin(),  $user->getPassword());
+
+            if($log === true){
+
+                return true;
+            }else{
+                if(is_bool($log)){
+                    $this->error = "l'utilisateur n'existe pas";
+                }
+                else{
+                    $this->error = $log;
+                }
+
+                return false;
+            }
+        }else{
+            $this->error = "Erreur d'authentification";
+        }
+        return false;
+
         //TODO check if user exist
     }
 
 
     public function isLogged(){
 
-        if ($this->session->get('user') == null) {
-            if($this->checkCredentials()){
-                return false;
-            }
+        if ($this->session->get('user')!= null) {
+
             return true;
         }
         else{
-            return true;
+            return false;
         }
     }
 }

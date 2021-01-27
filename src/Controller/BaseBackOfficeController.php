@@ -20,8 +20,8 @@ class BaseBackOfficeController extends AbstractController
     public function __construct(ApiService $service, SecurityController  $security){
         $this->security = $security;
         $this->service = $service;
-        if (!$this->security->isLogged()) {
-            return $this->redirectToRoute('admin_login');
+        if ($this->security->isLogged()) {
+            return $this->security->redirectToRoute('admin_login');
         }
     }
 }

@@ -1,18 +1,35 @@
-
-
-
 {% extends 'base_backoffice.html.twig' %}
 {% block body %}
     <section id="body">
         <h1>Back office</h1>
         <section class=" bo_edit">
-            <h2>{{ title }}</h2>
+            <h2 class="backoffice_edit_h2">{{ title }}</h2>
             {{ form_start(form) }}
+            <div class="backoffice_edit_div_title">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+            </div>
+            <div class="backoffice_edit_div_date">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date) }}
+
+            </div>
+            <div class="backoffice_edit_div_text">
+                {{ form_label(form.text) }}
+                {{ form_widget(form.text) }}
+
+            </div>
+            <div class="backoffice_edit_div_image">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image) }}
+
+            </div>
+
+            <div class="backoffice_edit_div_buttons">
+                <button><a href="{{ path('admin_index') }}">Annuler</a></button>
+                {{ form_widget(form.submit) }}
+            </div>
             {{ form_end(form) }}
         </section>
     </section>
-    <script>
-
-
-    </script>
 {% endblock %}

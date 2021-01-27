@@ -1,6 +1,31 @@
+
+
+{% extends 'base_backoffice.html.twig' %}
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_errors(form) }}
-    {{ form_end(form) }}
+    <section id="body">
+        <h1>Back office</h1>
+        <section class=" bo_edit login">
+            <h2 class="backoffice_edit_h2">{{ title }}</h2>
+            {{ form_start(form) }}
+            <div class="backoffice_edit_div_login">
+                {{ form_label(form.login) }}
+                {{ form_widget(form.login) }}
+            </div>
+            <div class="backoffice_edit_div_password">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password) }}
+            </div>
+            {% if error is not empty %}
+                <div id="login_eroor">{{ error }}</div>
+            {% endif %}
+
+            <div class="backoffice_edit_div_buttons">
+                {{ form_widget(form.submit, { 'label': 'Log in' }) }}
+            </div>
+            {{ form_end(form) }}
+        </section>
+    </section>
+
 {% endblock %}
+
+

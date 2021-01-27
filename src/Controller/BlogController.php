@@ -40,7 +40,7 @@ class BlogController extends BaseBackOfficeController{
         }
         return $this->render('/backoffice/blog/new_or_edit.html.twig',[
             "form" => $form->createView(),
-            "title" => "Creation d'un article de blog",
+            "title" => "Creation d'un blog",
         ]);
     }
 
@@ -78,8 +78,8 @@ class BlogController extends BaseBackOfficeController{
                 $this->service->editBlog($blog) ;
                 return $this->redirectToRoute('admin_index');
             }
-            return $this->render('backoffice/blog/edit.html.twig', [
-                'editform' => $form->createView(),
+            return $this->render('backoffice/blog/new_or_edit.html.twig', [
+                'form' => $form->createView(),
                 'blog' => $api_blog,
                 'title' => 'Modification du Blog : '.$blog ->getTitle(),
             ]);

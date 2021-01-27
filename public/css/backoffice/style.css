@@ -90,6 +90,7 @@ nav{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-top-left-radius:10px;
 
+
 }
 
 .bo_sections article a {
@@ -168,7 +169,7 @@ article table{
 
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 5%;
+
 
 }
 #skills_buttons{
@@ -186,7 +187,7 @@ article table{
     padding: 0.5%;
 }
 .backoffice_edit_skills_buttons, .backoffice_edit_div_buttons button{
-    border: transparent;
+    border: #264653;
     margin: 1%;
     width: 20%;
     height: 33%;
@@ -209,24 +210,61 @@ article table{
 }
 
 
-.backoffice_edit_div_skills, .backoffice_edit_div_name{
+.backoffice_edit_div_skills, .backoffice_edit_div_name, .backoffice_edit_div_text, .backoffice_edit_div_title, .backoffice_edit_div_date{
     display: flex;
-
+    align-items: center;
 }
-.backoffice_edit_div_image label, .backoffice_edit_div_skills label, .backoffice_edit_div_name label{
+
+.backoffice_edit_div_login label{
+    margin-right: 15%;
+}
+.backoffice_edit_div_password label{
+    margin-right: 7%;
+}
+.backoffice_edit_div_date label{
+    margin-right: 4.5%;
+}
+.backoffice_edit_div_date select{
+    width: 30%;
+}
+.backoffice_edit_div_image label{
+    margin-right: 7%;
+}
+.backoffice_edit_div_name label{
+    margin-right: 7.5%;
+}
+.backoffice_edit_div_skills label{
+    margin-right: 5%;
+}
+
+.backoffice_edit_div_title label{
+    margin-right: 5%;
+}
+.backoffice_edit_div_text textarea{
+    color: #264653;
+    padding: 0.5%;
+    width: 50%;
+    height: 100px;
+}
+.backoffice_edit_div_text label{
     margin-right: 5%;
 }
 .backoffice_edit_div_image {
     display: flex;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 .backoffice_edit_div_skills select, .backoffice_edit_div_name input{
     width: 20%;
     margin-bottom: 1%;
 }
+
 .bo_edit form{
-    padding: 5%;
+
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 2%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -240,7 +278,7 @@ article table{
 }
 
 input[type=text], select {
-    width: 50%;
+    width: 35%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -322,4 +360,20 @@ input[type=text], select {
 .backoffice_index_button_new:hover{
     background-color:#E2E1E0 ;
     color: #264653;
+}
+.login{
+    width: 20%;
+
+}
+.login h2{
+    border-top-right-radius: 10px;
+}
+.backoffice_edit_div_login input, .backoffice_edit_div_password input{
+
+    width: 50%;
+}
+#login_eroor{
+    margin-left: 30%;
+    color: red;
+    font-size: 12px;
 }

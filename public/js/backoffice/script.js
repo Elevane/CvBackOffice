@@ -43,22 +43,23 @@ $('#skills_add').on('change', function (){
 //quand on enleve un bouton de skills
 $('#skills_buttons').on('click', function (e){
     if (!e.target) {
-    } else {
+
+    } else if(e.target.id !="skills_buttons"){
         $('#' + e.target.id).remove();
+        $('#skills_add').append(new Option(e.target.id, e.target.id));
+        var skills = $('#project_skills').val().split(' ');
+        if(skills){
+            var newVal = "";
+            for(var i = 0; i < skills.length; i++){
 
-    }
-    $('#skills_add').append(new Option(e.target.id, e.target.id));
-    var skills = $('#project_skills').val().split(' ');
-    if(skills){
-        var newVal = "";
-        for(var i = 0; i < skills.length; i++){
+                if(skills[i] !== e.target.id){
+                    newVal += skills[i] + " ";
+                }
 
-            if(skills[i] !== e.target.id){
-                newVal += skills[i] + " ";
+
             }
-
-
+            $('#project_skills').val(newVal);
         }
-        $('#project_skills').val(newVal);
     }
+
 });

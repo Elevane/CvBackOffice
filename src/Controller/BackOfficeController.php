@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Skill;
 use App\Form\SkillType;
 use App\Service\ApiService;
+use App\Service\BlogService;
+use App\Service\ProjectService;
+use App\Service\SkillService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +18,11 @@ use App\Controller\BaseBackOfficeController;
 class BackOfficeController extends BaseBackOfficeController
 {
 
-    public function __construct(ApiService $service, SecurityController $security)
+
+    public function __construct(ApiService $service, SecurityController $security,SkillService $skillService, ProjectService $projectService, BlogService $blogService)
     {
-        parent::__construct($service, $security);
+        parent::__construct($service, $security, $skillService,$projectService, $blogService);
+
     }
 
     /**
@@ -27,10 +32,11 @@ class BackOfficeController extends BaseBackOfficeController
      */
     public function indexAction(Request $request): Response
     {
+
         $status = true;
-        $skills = $this->service->getSkills();
-        $projects = $this->service->getProjects();
-        $blogs = $this->service->getBlogs();
+        $skills = $this->skillservice->getSkills();
+        $projects = $this->projectService->getProjects();
+        $blogs = $this->blogService->getBlogs();
         if (count($blogs) < 1 && count($projects) < 1 && count($skills) < 1) {
             $status = false;
         }

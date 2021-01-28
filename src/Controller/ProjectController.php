@@ -26,7 +26,7 @@ class ProjectController extends BaseBackOfficeController{
     {
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
-        $skills = $this->service->getSkills();
+        $skills = $this->skillservice->getSkills();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['image']->getData();
@@ -35,7 +35,7 @@ class ProjectController extends BaseBackOfficeController{
             $pathFileName = $path . $filename;
 
             $project->setImage($pathFileName);
-            $this->service->newProject($project);
+            $this->projectService->newProject($project);
             $file->move($path, $filename );
 
             return $this->redirectToRoute('backoffice_index');
@@ -56,8 +56,8 @@ class ProjectController extends BaseBackOfficeController{
     public function editAction(Request $request, int $id){
 
     $project = new Project();
-    $api_project = $this->service->getProject($id);
-    $skills = $this->service->getSkills();
+    $api_project = $this->projectService->getProject($id);
+    $skills = $this->skillservice->getSkills();
     if($api_project){
 
 
@@ -83,7 +83,7 @@ class ProjectController extends BaseBackOfficeController{
                 $project->setImage($api_project['image']);
             }
 
-            $this->service->editProject($project) ;
+            $this->skillservice->editProject($project) ;
             return $this->redirectToRoute('backoffice_index');
         }
 
@@ -107,10 +107,10 @@ class ProjectController extends BaseBackOfficeController{
      */
     public function deleteAction(int $id): RedirectResponse
 {
-    $project = $this->service->getProject($id);
+    $project = $this->projectService->getProject($id);
     if($project) {
 
-        $this->service->deleteProject($project['id']);
+        $this->projectService->deleteProject($project['id']);
         return $this->redirectToRoute('backoffice_index');
     }
     return $this->redirectToRoute('backoffice_index');

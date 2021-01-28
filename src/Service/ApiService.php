@@ -31,13 +31,11 @@ class ApiService{
         $this->serializer =  new Serializer($normalizers, $encoders);
     }
 
-
-    public function getProject(int $id){
-        $content = [];
+    public function get($entity, $id){
         try {
             $response = $this->client->request(
                 'GET',
-                "http://127.0.0.1:5000/project/" . $id
+                Constants::APIENDPOINT.$entity."/".$id
             );
 
             $statusCode = $response->getStatusCode();
@@ -49,16 +47,59 @@ class ApiService{
             $content = $response->toArray();
             // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
         } catch (\Throwable $th) {
-
+            throw $th;
         }
         return $content;
     }
-    public function getSkill(int $id){
+    public function post($entity, $obj){
+
+        try {
+            $response = $this->client->request(
+                'POST',
+                Constants::APIENDPOINT.$entity,[
+                    'json' => $obj->toJson(),]
+            );
+
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
+        } catch (\Throwable $th) {
+            echo $th;
+        }
+
+    }
+    public function delete($entity, $id){
+        try {
+            $response = $this->client->request(
+                'DELETE',
+                Constants::APIENDPOINT.$entity."/". $id
+            );
+
+            $statusCode = $response->getStatusCode();
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
+        } catch (\Throwable $th) {
+            return false;
+        }
+        return true;
+
+    }
+    public function getAll($entity){
         $content = [];
         try {
             $response = $this->client->request(
                 'GET',
-                "http://127.0.0.1:5000/skill/" . $id
+                Constants::APIENDPOINT. $entity
             );
 
             $statusCode = $response->getStatusCode();
@@ -70,95 +111,35 @@ class ApiService{
             $content = $response->toArray();
             // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
         } catch (\Throwable $th) {
-
+            throw $th;
         }
         return $content;
     }
-    public function getSkills():array
-    {
-       
-        $content = [];
+    public function patch($entity, $obj){
         try {
             $response = $this->client->request(
-                'GET',
-                "http://127.0.0.1:5000/skill"
+                'PATCH',
+                Constants::APIENDPOINT.$entity,[
+                    'json' => $obj->toJsonId(),]
             );
 
             $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+            // $statusCode = 200
+            $contentType = $response->getHeaders()['content-type'][0];
+            // $contentType = 'application/json'
+            $content = $response->getContent();
+            // $content = '{"id":521583, "name":"symfony-docs", ...}'
+
+            $array = $response->toArray();
         } catch (\Throwable $th) {
-          
+            return false;
         }
-        
-
-        
-
-        return $content;
+        return true;
     }
-    public function getProjects():array
-    {
-       
-        $content = [];
-        try {
-            $response = $this->client->request(
-                'GET',
-                "http://127.0.0.1:5000/project"
-            );
 
-            $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        } catch (\Throwable $th) {
-           
-        }
-        
 
-        
-
-        return $content;
-    }
-    public function getBlogs():array
-    {
-       
-        $content = [];
-        try {
-            $response = $this->client->request(
-                'GET',
-                "http://127.0.0.1:5000/blog"
-            );
-
-            $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        } catch (\Throwable $th) {
-           
-        }
-        
-
-        
-
-        return $content;
-    }
     public function getUserByUsername($user)
     {
-       
-
         try {
             $response = $this->client->request(
                 'POST',
@@ -188,229 +169,11 @@ class ApiService{
         else{
             $res = true;
         }
-
         return $res;
     }
-    public function newSkill(Skill $skill){
-        try {
-            $response = $this->client->request(
-                'POST',
-                "http://127.0.0.1:5000/skill",[
-                    'json' => $skill->toJson(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            echo $th;
-        }
-    }
-    public function editSkill(Skill $skill){
-        try {
-            $response = $this->client->request(
-                'PATCH',
-                "http://127.0.0.1:5000/skill",[
-                    'json' => $skill->toJsonId(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-    }
-    public function deleteSkill(int $id){
-        try {
-            $response = $this->client->request(
-                'DELETE',
-                "http://127.0.0.1:5000/skill/". $id
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-
-    }
-
-    public function editBlog(Blog $blog){
-
-        try {
-            $response = $this->client->request(
-                'PATCH',
-                "http://127.0.0.1:5000/blog",[
-                    'json' => $blog->toJsonId(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-    }
-
-    public function editProject(Project $project){
-
-        try {
-            $response = $this->client->request(
-                'PATCH',
-                "http://127.0.0.1:5000/project",[
-                    'json' => $project->toJsonId(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-    }
-    public function deleteBlog(int $id){
-        try {
-            $response = $this->client->request(
-                'DELETE',
-                "http://127.0.0.1:5000/blog/". $id
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-
-    }
-
-    public function deleteProject(int $id){
-        try {
-            $response = $this->client->request(
-                'DELETE',
-                "http://127.0.0.1:5000/project/". $id
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            return false;
-        }
-        return true;
-
-    }
 
 
 
 
-
-    public function newBlog(Blog $blog){
-
-        try {
-            $response = $this->client->request(
-                'POST',
-                "http://127.0.0.1:5000/blog",[
-                    'json' => $blog->toJson(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            echo $th;
-        }
-    }
-
-    public function newProject(Project $project){
-
-        try {
-            $response = $this->client->request(
-                'POST',
-                "http://127.0.0.1:5000/project",[
-                    'json' => $project->toJson(),]
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-
-            $array = $response->toArray();
-        } catch (\Throwable $th) {
-            echo $th;
-        }
-    }
-
-    public function getBlog(int $id){
-        $content = [];
-        try {
-            $response = $this->client->request(
-                'GET',
-                "http://127.0.0.1:5000/blog/" . $id
-            );
-
-            $statusCode = $response->getStatusCode();
-            // $statusCode = 200
-            $contentType = $response->getHeaders()['content-type'][0];
-            // $contentType = 'application/json'
-            $content = $response->getContent();
-            // $content = '{"id":521583, "name":"symfony-docs", ...}'
-            $content = $response->toArray();
-            // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        } catch (\Throwable $th) {
-
-        }
-        return $content;
-    }
     
 }

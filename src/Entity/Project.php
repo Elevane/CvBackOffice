@@ -6,6 +6,7 @@ namespace App\Entity;
 
 class Project
 {
+    const NAME = "Project";
     private $id;
     private $image;
     private $name;

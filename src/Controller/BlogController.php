@@ -33,7 +33,7 @@ class BlogController extends BaseBackOfficeController{
             $pathFileName = $path . $filename;
 
             $blog->setImage($pathFileName);
-            $this->service->newBlog($blog);
+            $this->blogService->newBlog($blog);
             $file->move($path, $filename );
 
             return $this->redirectToRoute('backoffice_index');
@@ -54,7 +54,7 @@ class BlogController extends BaseBackOfficeController{
     public function editAction(Request $request, int $id){
 
         $blog = new Blog();
-        $api_blog = $this->service->getBlog($id);
+        $api_blog = $this->blogService->getBlog($id);
         if($api_blog){
             $blog ->setId($api_blog['id']);
             $blog ->setImage(new File($api_blog['image']));
@@ -75,7 +75,7 @@ class BlogController extends BaseBackOfficeController{
                 else{
                     $blog->setImage($api_blog['image']);
                 }
-                $this->service->editBlog($blog);
+                $this->blogService->editBlog($blog);
                 return $this->redirectToRoute('backoffice_index');
             }
             return $this->render('backoffice/blog/new_or_edit.html.twig', [
@@ -99,9 +99,9 @@ class BlogController extends BaseBackOfficeController{
      */
     public function deleteAction(int $id): RedirectResponse
     {
-        $blog = $this->service->getProject($id);
+        $blog = $this->blogService->getBlog($id);
         if($blog) {
-            $this->service->deleteProject($id);
+            $this->blogService->deleteBlog($id);
             return $this->redirectToRoute('backoffice_index');
         }
         return $this->redirectToRoute('backoffice_index');

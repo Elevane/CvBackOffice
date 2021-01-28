@@ -6,6 +6,7 @@ namespace App\Entity;
 
 class Blog
 {
+    const NAME = "Blog";
 
     private $id;
     private $date;

@@ -30,21 +30,16 @@ class SkillController extends BaseBackOfficeController
     public function editAction(Request $request, int $id){
 
         $skill = new Skill();
-        $api_skill = $this->service->getSkill($id);
+        $api_skill = $this->skillservice->getSkill($id);
         if($api_skill){
             $skill->setId($api_skill['id']);
             $skill->setActive($api_skill['active']);
             $skill->setName($api_skill['name']);
             $skill->setRatio($api_skill['ratio']);
-
-
-
             $form =$this->createForm(SkillType::class, $skill);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
-
-                $data = $form->getData();
-                $this->service->editSkill($skill);
+                $this->skillservice->editSkill($skill);
                 return $this->redirectToRoute('backoffice_index');
             }
             return $this->render('backoffice/skill/edit.html.twig', ['editform' => $form->createView(),
@@ -67,9 +62,9 @@ class SkillController extends BaseBackOfficeController
      */
     public function deleteAction(int $id): RedirectResponse
     {
-        $skill = $this->service->getSkill($id);
+        $skill = $this->skillservice->getSkill($id);
         if($skill){
-            $this->service->deleteSkill($id);
+            $this->skillservice->deleteSkill($id);
             return $this->redirectToRoute('backoffice_index');
         }
         return $this->redirectToRoute('backoffice_index');

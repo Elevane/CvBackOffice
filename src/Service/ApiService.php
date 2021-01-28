@@ -255,6 +255,7 @@ class ApiService{
     }
 
     public function editBlog(Blog $blog){
+
         try {
             $response = $this->client->request(
                 'PATCH',

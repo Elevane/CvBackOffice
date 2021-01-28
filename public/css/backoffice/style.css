@@ -377,3 +377,18 @@ input[type=text], select {
     color: red;
     font-size: 12px;
 }
+#blog_date{
+    width: 80%;
+
+}
+#blog_date_month{
+    width: 20%;
+    margin-right: 1%;
+}
+#blog_date_year{
+    width: 18%;
+}
+#blog_date_day{
+    width: 12%;
+    margin-right: 1%;
+}

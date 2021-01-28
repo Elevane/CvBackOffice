@@ -65,7 +65,9 @@ class BlogController extends BaseBackOfficeController{
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
                 $file = $form['image']->getData();
+
                 if($file != null){
+
                     $filename = $file->getClientOriginalName();
                     $path = "image/blog/";
                     $pathFileName = $path . $filename;
@@ -75,7 +77,7 @@ class BlogController extends BaseBackOfficeController{
                 else{
                     $blog->setImage($api_blog['image']);
                 }
-                $this->service->editBlog($blog) ;
+                $this->service->editBlog($blog);
                 return $this->redirectToRoute('admin_index');
             }
             return $this->render('backoffice/blog/new_or_edit.html.twig', [

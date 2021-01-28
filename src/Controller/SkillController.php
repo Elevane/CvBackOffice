@@ -22,7 +22,7 @@ class SkillController extends BaseBackOfficeController
 
 
     /**
-     * @Route("/admin/skill/edit/{id}", name="admin_skill_edit")
+     * @Route("/backoffice/skill/edit/{id}", name="backoffice_skill_edit")
      * @param Request $request
      * @param int $id
      * @return RedirectResponse|Response
@@ -45,7 +45,7 @@ class SkillController extends BaseBackOfficeController
 
                 $data = $form->getData();
                 $this->service->editSkill($skill);
-                return $this->redirectToRoute('admin_index');
+                return $this->redirectToRoute('backoffice_index');
             }
             return $this->render('backoffice/skill/edit.html.twig', ['editform' => $form->createView(),
                 'skill' => $api_skill,
@@ -54,14 +54,14 @@ class SkillController extends BaseBackOfficeController
         }
 
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('backoffice_index');
     }
 
 
 
 
     /**
-     * @Route("/admin/skill/delete/{id}", name="admin_skill_delete")
+     * @Route("/backoffice/skill/delete/{id}", name="backoffice_skill_delete")
      * @param int $id
      * @return RedirectResponse
      */
@@ -70,8 +70,8 @@ class SkillController extends BaseBackOfficeController
         $skill = $this->service->getSkill($id);
         if($skill){
             $this->service->deleteSkill($id);
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('backoffice_index');
         }
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('backoffice_index');
     }
 }

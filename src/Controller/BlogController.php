@@ -19,7 +19,7 @@ class BlogController extends BaseBackOfficeController{
     /**
      * @param Request $request
      * @return Response
-     * @Route("/admin/blog/new", name="admin_blog_new")
+     * @Route("/backoffice/blog/new", name="backoffice_blog_new")
      */
     public function newAction(Request $request): Response
     {
@@ -36,7 +36,7 @@ class BlogController extends BaseBackOfficeController{
             $this->service->newBlog($blog);
             $file->move($path, $filename );
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('backoffice_index');
         }
         return $this->render('/backoffice/blog/new_or_edit.html.twig',[
             "form" => $form->createView(),
@@ -45,17 +45,17 @@ class BlogController extends BaseBackOfficeController{
     }
 
     /**
-     * @Route("/admin/blog/edit/{id}", name="admin_blog_edit")
+     * @Route("/backoffice/blog/edit/{id}", name="backoffice_blog_edit")
      * @param Request $request
      * @param int $id
      * @return RedirectResponse|Response
+     * @throws \Exception
      */
     public function editAction(Request $request, int $id){
 
         $blog = new Blog();
         $api_blog = $this->service->getBlog($id);
         if($api_blog){
-
             $blog ->setId($api_blog['id']);
             $blog ->setImage(new File($api_blog['image']));
             $blog ->setDate(new DateTime($api_blog['date']));
@@ -65,9 +65,7 @@ class BlogController extends BaseBackOfficeController{
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
                 $file = $form['image']->getData();
-
                 if($file != null){
-
                     $filename = $file->getClientOriginalName();
                     $path = "image/blog/";
                     $pathFileName = $path . $filename;
@@ -78,7 +76,7 @@ class BlogController extends BaseBackOfficeController{
                     $blog->setImage($api_blog['image']);
                 }
                 $this->service->editBlog($blog);
-                return $this->redirectToRoute('admin_index');
+                return $this->redirectToRoute('backoffice_index');
             }
             return $this->render('backoffice/blog/new_or_edit.html.twig', [
                 'form' => $form->createView(),
@@ -88,14 +86,14 @@ class BlogController extends BaseBackOfficeController{
         }
 
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('backoffice_index');
     }
 
 
 
 
     /**
-     * @Route("/admin/blog/delete/{id}", name="admin_blog_delete")
+     * @Route("/backoffice/blog/delete/{id}", name="backoffice_blog_delete")
      * @param int $id
      * @return RedirectResponse
      */
@@ -104,8 +102,8 @@ class BlogController extends BaseBackOfficeController{
         $blog = $this->service->getProject($id);
         if($blog) {
             $this->service->deleteProject($id);
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('backoffice_index');
         }
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('backoffice_index');
     }
 }

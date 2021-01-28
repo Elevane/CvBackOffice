@@ -20,7 +20,7 @@ class ProjectController extends BaseBackOfficeController{
     /**
      * @param Request $request
      * @return Response
-     * @Route("/admin/project/new", name="admin_project_new")
+     * @Route("/backoffice/project/new", name="backoffice_project_new")
      */
     public function newAction(Request $request): Response
     {
@@ -38,7 +38,7 @@ class ProjectController extends BaseBackOfficeController{
             $this->service->newProject($project);
             $file->move($path, $filename );
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('backoffice_index');
         }
         return $this->render('/backoffice/project/new_or_edit.html.twig',[
             "form" => $form->createView(),
@@ -48,7 +48,7 @@ class ProjectController extends BaseBackOfficeController{
     }
 
     /**
-     * @Route("/admin/project/edit/{id}", name="admin_project_edit")
+     * @Route("/backoffice/project/edit/{id}", name="backoffice_project_edit")
      * @param Request $request
      * @param int $id
      * @return RedirectResponse|Response
@@ -84,7 +84,7 @@ class ProjectController extends BaseBackOfficeController{
             }
 
             $this->service->editProject($project) ;
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('backoffice_index');
         }
 
         return $this->render('backoffice/project/new_or_edit.html.twig', [
@@ -94,14 +94,14 @@ class ProjectController extends BaseBackOfficeController{
             'title' => 'Modification du Project : '.$project ->getName(),
         ]);
     }
-    return $this->redirectToRoute('admin_index');
+    return $this->redirectToRoute('backoffice_index');
 }
 
 
 
 
     /**
-     * @Route("/admin/project/delete/{id}", name="admin_project_delete")
+     * @Route("/backoffice/project/delete/{id}", name="backoffice_project_delete")
      * @param int $id
      * @return RedirectResponse
      */
@@ -111,8 +111,8 @@ class ProjectController extends BaseBackOfficeController{
     if($project) {
 
         $this->service->deleteProject($project['id']);
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('backoffice_index');
     }
-    return $this->redirectToRoute('admin_index');
+    return $this->redirectToRoute('backoffice_index');
 }
 }

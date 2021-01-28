@@ -20,13 +20,13 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         $skills = $this->service->getSkills();
-        $projets = $this->service->getProjects();
+        $projects = $this->service->getProjects();
         $blogs = $this->service->getBlogs();
 
         return $this->render('front/index.html.twig', [
             'blogs'=>$blogs,
             'skills' => $skills,
-            'projects'=> $projets,
+            'projects'=> $projects,
         ]);
     }
 

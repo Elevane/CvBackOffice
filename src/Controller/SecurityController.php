@@ -19,6 +19,7 @@ class SecurityController extends AbstractController
 
     /**
      * @param SessionInterface $session
+     * @param ApiService $service
      */
     public function __construct(SessionInterface $session, ApiService $service){
         $this->session = $session;
@@ -27,7 +28,7 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/login", name="admin_login")
+     * @Route("/login", name="backoffice_login")
      * @param Request $request
      * @return Response
      */
@@ -40,7 +41,7 @@ class SecurityController extends AbstractController
 
                 if ($this->checkCredentials($user)) {
                     $this->AddUserTosession($user);
-                    return $this->redirectToRoute('admin_index');
+                    return $this->redirectToRoute('backoffice_index');
 
                 }
             }
@@ -54,13 +55,13 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="admin_logout")
+     * @Route("/logout", name="backoffice_logout")
      */
     public function logout(): Response
     {
         $this->session->clear();
 
-        return $this->redirectToRoute('admin_login');
+        return $this->redirectToRoute('backoffice_login');
     }
 
 
@@ -72,11 +73,16 @@ class SecurityController extends AbstractController
         }
     }
 
-    public function checkCredentials($user)
+    /**
+     * @param $user
+     * @return bool
+     * Vérifie sur l'utilsiateur présent en session est le bon et existe. Sinon vérifie les données données du formulaire.
+     */
+    public function checkCredentials($user): bool
     {
         if($user != null &&  $this->session->get('user') == null){
 
-            $log = $this->service->getUserByUsername( $user->getLogin(),  $user->getPassword());
+            $log = $this->service->getUserByUsername($user);
 
             if($log === true){
 
@@ -92,15 +98,24 @@ class SecurityController extends AbstractController
                 return false;
             }
         }else{
+            if($this->session->get('user')){
+                $log = $this->service->getUserByUsername( $this->session->get('user'));
+               if($log === true){
+                   return true;
+               }
+               $this->error = "L'utilisateur n'éxiste pas";
+                return false;
+            }
             $this->error = "Erreur d'authentification";
         }
         return false;
 
-        //TODO check if user exist
+
     }
 
 
-    public function isLogged(){
+    public function isLogged(): bool
+    {
 
         if ($this->session->get('user')!= null) {
 

@@ -21,7 +21,7 @@ class BaseBackOfficeController extends AbstractController
         $this->security = $security;
         $this->service = $service;
         if ($this->security->isLogged()) {
-            return $this->security->redirectToRoute('admin_login');
+            return $this->security->redirectToRoute('backoffice_login');
         }
     }
 }

@@ -155,7 +155,7 @@ class ApiService{
 
         return $content;
     }
-    public function getUserByUsername($username, $password)
+    public function getUserByUsername($user)
     {
        
 
@@ -163,7 +163,7 @@ class ApiService{
             $response = $this->client->request(
                 'POST',
                 "http://127.0.0.1:5000/getuser",[
-                'json' => ['username' => $username, 'password' => $password ]]
+                'json' => ['username' => $user->getLogin(), 'password' => $user->getPassword() ]]
             );
 
             $statusCode = $response->getStatusCode();

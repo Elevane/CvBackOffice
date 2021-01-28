@@ -3,7 +3,7 @@ let skills = document.getElementById('skills');
 let projects = document.getElementById('projects');
 let blog = document.getElementById('blog');
 let contact = document.getElementById('contact');
-
+let filters = document.getElementById('filters')
 
 var btnabout = document.getElementById('aabout');
 btnabout.addEventListener('click', function(){
@@ -35,143 +35,74 @@ var btncontact = document.getElementById('acontact');
 	contact.scrollIntoView({behavior: "smooth"});
 })
 
-
-// handle see more/less of projects and blog sections
-	var fullheight = $('#projects article')[0].scrollHeight + 300 + "px";
-	var originalheight = $('#projects').height();
-	$('#showmorepro').on('click', function () {
-		if ($('#showmorepro').hasClass("less")) {
-			$('#showmorepro').removeClass('less');
-		
-			$('#projects').animate({
-				height: fullheight
-			}, 1000, function () {
-				//animation complete
-				$('#showmorepro').find('img').attr('src', "img/arrow_up.png");
-				$('#showmorepro').addClass('more');
-					
-			});
-		
-		}
-		else if ($('#showmorepro').hasClass("more")) {
-			$('#showmorepro').removeClass('more');
-			$('#projects').animate({
-				height: originalheight
-			}, 1000, function () {
-				//animation complete
-				$('#showmorepro').find('img').attr('src', "img/arrow_down.png");
-				$('#showmorepro').addClass('less');
-					
-			});
-		
-		}
-	
-	});
-
-	var blogfullheight = $('#blog article')[0].scrollHeight + 300 + "px";
-	var blogoriginalheight = $('#blog').height();
-	$('#showmoreblog').on('click', function () {
-		if ($('#showmoreblog').hasClass("less")) {
-			$('#showmoreblog').removeClass('less');
-
-			$('#blog').animate({
-				height: blogfullheight
-			}, 1000, function () {
-				//animation complete
-				$('#showmoreblog').find('img').attr('src', "img/arrow_up.png");
-				$('#showmoreblog').addClass('more');
-
-			});
-
-		}
-		else if ($('#showmoreblog').hasClass("more")) {
-			$('#showmoreblog').removeClass('more');
-			$('#blog').animate({
-				height: blogoriginalheight
-			}, 1000, function () {
-				//animation complete
-				$('#showmoreblog').find('img').attr('src', "img/arrow_down.png");
-				$('#showmoreblog').addClass('less');
-
-			});
-
-		}
-
-	});
-
 //Handle dynamic skills bars
-	var triggerAtY = $('#skills').offset().top - $(window).outerHeight();
+	var triggerAtY = skills.offsetTop - window.outerHeight;
 
-	$(window).scroll(function (event) {
+	window.addEventListener('scroll',function (event) {
 		// #target not yet in view
-		if (triggerAtY > $(window).scrollTop()) {
+		if (triggerAtY > window.offsetTop) {
 			return;
 		}
-
-
-		var elm = $('.ratioSkill');
-		console.log('scrolling');
-		elm.each(function () {
-			jQuery(this).find('div').animate({
-				width: jQuery(this).attr('data-percent') * 4
+		var elm = document.querySelector('.ratioSkill');
+		for(var i = 0; i< elm.length; i ++){
+			elm[i].querySelector('div').animate({
+				width: this.getAttribute('data-percent') * 4
 			}, 1500);
-		});
+		}
+		// remove his event handler
 
+	});
 
-		// remove this event handler
-		$(this).off(event);
-	})
+/**
+ * Librairie de gestion du filtrage des projets
+ */
+var iso = new Isotope( '.ulpro', {
+	itemSelector: '.element-item',
+	layoutMode: 'fitRows'
+});
 
-////////////////////////////////////////////////////////////////////////////////////////////
-// quick search regex
-var qsRegex;
-var buttonFilter;
-
-// init Isotope
-var $grid = $('.ulpro').isotope({
-	itemSelector: '.pro',
-	layoutMode: 'fitRows',
-	filter: function () {
-		var $this = $(this);
-		var searchResult = qsRegex ? $this.text().match(qsRegex) : true;
-		var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
-		return searchResult && buttonResult;
+var filterFns = {
+	// show if number is greater than 50
+	numberGreaterThan50: function( itemElem ) {
+		var number = itemElem.querySelector('.number').textContent;
+		return parseInt( number, 10 ) > 50;
+	},
+	// show if name ends with -ium
+	ium: function( itemElem ) {
+		var name = itemElem.querySelector('.name').textContent;
+		return name.match( /ium$/ );
 	}
+};
+
+// bind filter button click
+var filtersElem = document.querySelector('.filters-button-group');
+filtersElem.addEventListener( 'click', function( event ) {
+	// only work with buttons
+	if ( !matchesSelector( event.target, 'button' ) ) {
+		return;
+	}
+	var filterValue = event.target.getAttribute('data-filter');
+	// use matching filter function
+	filterValue = filterFns[ filterValue ] || filterValue;
+	iso.arrange({ filter: filterValue });
 });
-
-$('#filters').on('click', 'button', function () {
-	buttonFilter = $(this).attr('data-filter');
-	$grid.isotope();
-});
-
-// use value of search field to filter
-var $quicksearch = $('#quicksearch').keyup(debounce(function () {
-	qsRegex = new RegExp($quicksearch.val(), 'gi');
-	$grid.isotope();
-}));
-
 
 // change is-checked class on buttons
-$('.button-group').each(function (i, buttonGroup) {
-	var $buttonGroup = $(buttonGroup);
-	$buttonGroup.on('click', 'button', function () {
-		$buttonGroup.find('.is-checked').removeClass('is-checked');
-		$(this).addClass('is-checked');
-	});
-});
-
-
-// debounce so filtering doesn't happen every millisecond
-function debounce(fn, threshold) {
-	var timeout;
-	threshold = threshold || 100;
-	return function debounced() {
-		clearTimeout(timeout);
-		var args = arguments;
-		var _this = this;
-		function delayed() {
-			fn.apply(_this, args);
-		}
-		timeout = setTimeout(delayed, threshold);
-	};
+var buttonGroups = document.querySelectorAll('.button-group');
+for ( var i=0, len = buttonGroups.length; i < len; i++ ) {
+	var buttonGroup = buttonGroups[i];
+	radioButtonGroup( buttonGroup );
 }
+
+function radioButtonGroup( buttonGroup ) {
+	buttonGroup.addEventListener( 'click', function( event ) {
+		// only work with buttons
+		if ( !matchesSelector( event.target, 'button' ) ) {
+			return;
+		}
+		buttonGroup.querySelector('.is-checked').classList.remove('is-checked');
+		event.target.classList.add('is-checked');
+	});
+}
+
+

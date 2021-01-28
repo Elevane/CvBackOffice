@@ -1,8 +1,8 @@
 /**
 IMPORTS
 */
-@import url('../font/Roboto/Roboto-Light.ttf');
-@import url('../font/Tomorrow/Tomorrow-Light.ttf');
+@import url('font/Roboto/Roboto-Light.ttf');
+@import url('font/Tomorrow/Tomorrow-Light.ttf');
 /*@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
 /**@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
 /**  */
@@ -223,6 +223,11 @@ nav li{
     justify-content: flex-start;
 
 
+}
+.ulpro{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 #projects > ul > li{
     padding-right: 20px;

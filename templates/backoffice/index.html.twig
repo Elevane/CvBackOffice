@@ -38,8 +38,8 @@
                                 >
                             </td>
                             <td>
-                                <a href="{{ path('backoffice_skill_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
-                                <a href="{{ path('backoffice_skill_delete', { id :  t.id }) }}" class="delBtn"><img  src="css//img/del.png"></a>
+                                <a href="{{ path('backoffice_skill_edit', { id :  t.id }) }}" class="editBtn"><img  alt="image_edit_button" src="css/img/edit.png"></a>
+                                <a href="{{ path('backoffice_skill_delete', { id :  t.id }) }}" class="delBtn"><img  alt="image_del_button" src="css//img/del.png"></a>
                             </td>
 
 
@@ -89,10 +89,10 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.name }}</td>
-                            <td class="backoffice_index_td_img" style="color:black;"><img class="backoffice_index_img"src="{{ t.image }}"></td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_project" class="backoffice_index_img"src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.skills }}</td>
-                            <td><a href="{{ path('backoffice_project_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
-                            <a href="{{ path('backoffice_project_delete', { id :  t.id }) }}" class="delBtn"><img  src="css/img/del.png"></a></td>
+                            <td><a href="{{ path('backoffice_project_edit', { id :  t.id }) }}" class="editBtn"><img alt="image_edit_button" src="css/img/edit.png"></a>
+                            <a href="{{ path('backoffice_project_delete', { id :  t.id }) }}" class="delBtn"><img alt="image_del_button" src="css/img/del.png"></a></td>
                         </tr>
 
                     {% endfor %}
@@ -121,12 +121,12 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.title }}</td>
-                            <td class="backoffice_index_td_img" style="color:black;"><img class="backoffice_index_img"src="{{ t.image }}"></td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_blog" class="backoffice_index_img"src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.date |format('Y-m-d') }}</td>
                             <td style="color:black;">{{ t.text }}</td>
                             <td>
-                                <a href="{{ path('backoffice_blog_edit', { id :  t.id }) }}" class="editBtn"><img  src="css/img/edit.png"></a>
-                                <a href="{{ path('backoffice_blog_delete', { id :  t.id }) }}" class="delBtn"><img  src="css/img/del.png"></a>
+                                <a href="{{ path('backoffice_blog_edit', { id :  t.id }) }}" class="editBtn"><img  alt="image_edit_button" src="css/img/edit.png"></a>
+                                <a href="{{ path('backoffice_blog_delete', { id :  t.id }) }}" class="delBtn"><img  alt="image_del_button" src="css/img/del.png"></a>
                             </td>
                         </tr>
 

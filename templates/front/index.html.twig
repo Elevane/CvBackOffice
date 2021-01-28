@@ -1,5 +1,4 @@
-
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 {% block body %}
     <section id="nav">
         <nav>
@@ -31,19 +30,18 @@
             <article>
 
 
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a mauris at nulla bibendum aliquet ut ac
-                        erat. Sed et gravida lorem. Morbi dolor nulla, porttitor ut molestie quis, sagittis vitae augue.
-                        Nullam
-                        erat risus, mattis sit amet ante vitae, efficitur eleifend mi. Nam fringilla venenatis accumsan.
-                        Phasellus ut fermentum neque, in ultrices lorem. Curabitur ultricies purus et lorem lobortis
-                        pellentesque. Phasellus justo diam, imperdiet placerat eleifend eget, facilisis sed nisl. Phasellus
-                        ac
-                        iaculis velit. Vestibulum dictum tellus magna, vitae laoreet neque pretium sit amet. Nullam mattis
-                        orci
-                        ac ligula laoreet, ut euismod libero maximus. Maecenas at lacus magna. Donec efficitur nulla in dui
-                        malesuada facilisis. Duis a velit eget dui imperdiet lobortis a eget nunc.
-                    </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a mauris at nulla bibendum aliquet ut ac
+                    erat. Sed et gravida lorem. Morbi dolor nulla, porttitor ut molestie quis, sagittis vitae augue.
+                    Nullam
+                    erat risus, mattis sit amet ante vitae, efficitur eleifend mi. Nam fringilla venenatis accumsan.
+                    Phasellus ut fermentum neque, in ultrices lorem. Curabitur ultricies purus et lorem lobortis
+                    pellentesque. Phasellus justo diam, imperdiet placerat eleifend eget, facilisis sed nisl. Phasellus
+                    ac
+                    iaculis velit. Vestibulum dictum tellus magna, vitae laoreet neque pretium sit amet. Nullam mattis
+                    orci
+                    ac ligula laoreet, ut euismod libero maximus. Maecenas at lacus magna. Donec efficitur nulla in dui
+                    malesuada facilisis. Duis a velit eget dui imperdiet lobortis a eget nunc.
+                </p>
 
             </article>
             <a id="contactmebtn">Contact Me</a>
@@ -52,22 +50,17 @@
         <div class="trait"></div>
 
 
-
-
-
         <!-- SKILLS -->
         <section id="skills">
             <h1>skills</h1>
             <article>
                 <ul>
-                {% for i in skills %}
-                    <li class="ratioSkill" data-percent="{{i.ratio}}">
-                        <h6>{{i.name}}</h6>
-                        <div></div>
-                    </li>
-                {% endfor %}
-
-
+                    {% for i in skills %}
+                        <li class="ratioSkill" data-percent="{{ i.ratio }}">
+                            <h6>{{ i.name }}</h6>
+                            <div></div>
+                        </li>
+                    {% endfor %}
 
 
                 </ul>
@@ -77,65 +70,60 @@
         </section>
 
 
-
-
         <!-- PROJECTS -->
         <div class="trait"></div>
-        <section  id="projects">
+        <section id="projects">
             <h1>projects</h1>
-            <ul id="filters" class="button-group">
-            <li>
-                    <button class="unativeButton btnT button"  data-filter="*">Show all</button>
-            </li>
-            {% for i in skills %}
-                     <li>
-                    <button class="unativeButton btnT button"  data-filter="*.{{i.name}}">{{i.name}}</button>
+            <ul id="filters" class="button-group filters-button-group">
+                <li>
+                    <button id="*" class=" filter_buttons unativeButton btnT button *" data-filter="*">Show all</button>
                 </li>
-
-
+                {% for i in skills %}
+                    <li>
+                        <button id="{{ i.name }}" class="filter_buttons unativeButton btnT button {{ i.name }}" data-filter="*.{{ i.name }}">{{ i.name }}</button>
+                    </li>
                 {% endfor %}
-                <p><input type="text" id="quicksearch" placeholder="Search" /></p>
+
             </ul>
 
-           <article>
+            <article>
 
 
                 <ul class="ulpro">
 
 
-                {% for i in projects %}
-                  <a class="pro {{i.skills}}" data-category="">
-                        <img class=""src="{{i.image}}" alt="photoProject">
-                        <p hidden>{{i.skills}}</p>
-                    </a>
-                {% endfor %}
+                    {% for i in projects %}
+                        <a class="pro element-item {{ i.skills }}" data-category="">
+                            <img class="" src="{{ i.image }}" alt="photoProject">
+                        </a>
+                    {% endfor %}
 
 
                 </ul>
 
             </article>
             </article>
-        <a id="showmorepro" class="less"><img src="css/img/arrow_down.png" ></a>
+
         </section>
 
         <div class="trait"></div>
         <section id="blog">
             <h1>blog</h1>
             <article>
-             {% for i in blogs %}
-                  <article>
-                <img src="{{i.image}}">
-                <div>
-                    <h3>{{i.title}}</h3>
-                    <h3>{{i.date | date("m/d/Y")}}</h3>
-                <p>{{i.text}}</p>
-                </div>
-            </article>
+                {% for i in blogs %}
+                    <article>
+                        <img src="{{ i.image }}">
+                        <div>
+                            <h3>{{ i.title }}</h3>
+                            <h3>{{ i.date | date("m/d/Y") }}</h3>
+                            <p>{{ i.text }}</p>
+                        </div>
+                    </article>
                 {% endfor %}
 
             </article>
 
-             <a id="showmoreblog" class="less"><img src="css/img/arrow_down.png" ></a>
+
         </section>
         <div class="trait"></div>
         <section id="contact">
@@ -143,34 +131,40 @@
 
             <form class="form-style-4" action="" method="post">
                 <label for="field1">
-                    <span>Enter Your Name</span><input type="text" name="field1" required="true" />
+                    <span>Enter Your Name</span><input type="text" name="field1" required="true"/>
                 </label>
                 <label for="field2">
-                    <span>Email Address</span><input type="email" name="field2" required="true" />
+                    <span>Email Address</span><input type="email" name="field2" required="true"/>
                 </label>
                 <label for="field3">
-                    <span>Short Subject</span><input type="text" name="field3" required="true" />
+                    <span>Short Subject</span><input type="text" name="field3" required="true"/>
                 </label>
                 <label for="field4">
-                    <span>Message to Us</span><textarea name="field4" onkeyup="adjust_textarea(this)" required="true"></textarea>
+                    <span>Message to Us</span><textarea name="field4" onkeyup="adjust_textarea(this)"
+                                                        required="true"></textarea>
                 </label>
                 <label>
-                    <span> </span><input type="submit" value="Send Letter" />
+                    <span> </span><input type="submit" value="Send Letter"/>
                 </label>
             </form>
         </section>
 
         <footer>
             <article>
-                <a target="blank" class="imgRs" href="https://www.linkedin.com/in/bastien-aubry-926560172/"><img src="css/img/Linkedin_5.png" alt="linkedin_logo"></a>
-                <a target="blank"  class="imgRs" href="https://github.com/Elevane?tab=repositories"><img src="css/img/Github_5.png" alt="github_logo"></a>
-                <a target="blank"  class="imgRs" href="https://twitter.com/bastienaubry"><img src="css/img/Twitter_5.png" alt="twitter_logo"></a>
-                <a  target="blank" class="imgRs" href="https://www.instagram.com/?hl=fr"><img src="css/img/Instagram_5.png" alt="instaga_logo"></a>
+                <a target="blank" class="imgRs" href="https://www.linkedin.com/in/bastien-aubry-926560172/"><img
+                            src="css/img/Linkedin_5.png" alt="linkedin_logo"></a>
+                <a target="blank" class="imgRs" href="https://github.com/Elevane?tab=repositories"><img
+                            src="css/img/Github_5.png" alt="github_logo"></a>
+                <a target="blank" class="imgRs" href="https://twitter.com/bastienaubry"><img src="css/img/Twitter_5.png"
+                                                                                             alt="twitter_logo"></a>
+                <a target="blank" class="imgRs" href="https://www.instagram.com/?hl=fr"><img
+                            src="css/img/Instagram_5.png" alt="instaga_logo"></a>
 
             </article>
             <p>Made by Bastien AUBRY</p>
-            <a  target="blank" class="imgRs" id="admin" href="{{ path('backoffice_login') }}"><img src="css/img/gear.png" alt="instaga_logo"></a>
-            
+            <a target="blank" class="imgRs" id="admin" href="{{ path('backoffice_login') }}"><img src="css/img/gear.png"
+                                                                                                  alt="instaga_logo"></a>
+
         </footer>
     </section>
 {% endblock %}

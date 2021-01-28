@@ -28,13 +28,16 @@ class BlogController extends BaseBackOfficeController{
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['image']->getData();
-            $filename = $file->getClientOriginalName();
-            $path = "image/blog/";
-            $pathFileName = $path . $filename;
+            if($file != null){
+                $filename = $file->getClientOriginalName();
+                $path = "image/blog/";
+                $pathFileName = $path . $filename;
 
-            $blog->setImage($pathFileName);
+                $blog->setImage($pathFileName);
+
+                $file->move($path, $filename );
+            }
             $this->blogService->newBlog($blog);
-            $file->move($path, $filename );
 
             return $this->redirectToRoute('backoffice_index');
         }

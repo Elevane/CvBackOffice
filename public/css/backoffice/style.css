@@ -3,7 +3,7 @@ IMPORTS
 */
 @font-face {
     font-family: 'tomorrow';
-    src: url('../font/Tomorrow/Tomorrow-Regular.ttf')  format('truetype');
+    src: url('../front/font/Tomorrow/Tomorrow-Regular.ttf')  format('truetype');
 }
 /* @import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
 /*@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');

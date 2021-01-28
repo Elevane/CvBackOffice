@@ -30,13 +30,17 @@ class ProjectController extends BaseBackOfficeController{
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form['image']->getData();
-            $filename = $file->getClientOriginalName();
-            $path = "image/project/";
-            $pathFileName = $path . $filename;
+            if($file != null){
+                $filename = $file->getClientOriginalName();
+                $path = "image/project/";
+                $pathFileName = $path . $filename;
 
-            $project->setImage($pathFileName);
+                $project->setImage($pathFileName);
+                $file->move($path, $filename );
+
+            }
+
             $this->projectService->newProject($project);
-            $file->move($path, $filename );
 
             return $this->redirectToRoute('backoffice_index');
         }
@@ -83,7 +87,7 @@ class ProjectController extends BaseBackOfficeController{
                 $project->setImage($api_project['image']);
             }
 
-            $this->skillservice->editProject($project) ;
+            $this->projectService->editProject($project) ;
             return $this->redirectToRoute('backoffice_index');
         }
 

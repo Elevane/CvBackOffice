@@ -24,4 +24,9 @@ class ProjectService extends ApiService
     public function getProject(int $id){
         return $this->get(Project::NAME, $id);
     }
+
+    public function getProjectWhere(array $param){
+        $json = json_encode($param);
+        return $this->getWhere( Project::NAME, $json);
+    }
 }

@@ -34,9 +34,8 @@ class ProjectController extends BaseBackOfficeController{
                 $filename = $file->getClientOriginalName();
                 $path = "image/project/";
                 $pathFileName = $path . $filename;
-
                 $project->setImage($pathFileName);
-                $file->move($path, $filename );
+                $file->move($path, $filename);
 
             }
 
@@ -67,7 +66,9 @@ class ProjectController extends BaseBackOfficeController{
 
 
         $project ->setId($api_project['id']);
-        $project ->setImage(new File($api_project['image']));
+        if(!empty($api_project['image'])){
+            $project ->setImage(new File($api_project['image']));
+        }
         $project ->setName($api_project['name']);
         $project ->setSkills($api_project['skills']);
 

@@ -4,6 +4,8 @@ let projects = document.getElementById('projects');
 let blog = document.getElementById('blog');
 let contact = document.getElementById('contact');
 let filters = document.getElementById('filters')
+let eventDone = false;
+
 
 var btnabout = document.getElementById('aabout');
 btnabout.addEventListener('click', function(){
@@ -35,23 +37,19 @@ var btncontact = document.getElementById('acontact');
 	contact.scrollIntoView({behavior: "smooth"});
 })
 
-//Handle dynamic skills bars
-	var triggerAtY = skills.offsetTop - window.outerHeight;
+var cards_projects = document.querySelectorAll('.cards_pro');
 
-	window.addEventListener('scroll',function (event) {
-		// #target not yet in view
-		if (triggerAtY > window.offsetTop) {
-			return;
-		}
-		var elm = document.querySelector('.ratioSkill');
-		for(var i = 0; i< elm.length; i ++){
-			elm[i].querySelector('div').animate({
-				width: this.getAttribute('data-percent') * 4
-			}, 1500);
-		}
-		// remove his event handler
-
+ cards_projects.forEach(elm =>{
+	elm.addEventListener('mouseenter', function (){
+		elm.querySelector('p').hidden = false;
 	});
+	elm.addEventListener('mouseleave', function (){
+		elm.querySelector('p').hidden = true;
+	})
+})
+
+
+
 
 /**
  * Librairie de gestion du filtrage des projets

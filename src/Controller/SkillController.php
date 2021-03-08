@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class SkillController extends BaseBackOfficeController
 {
 
-
     /**
      * @Route("/backoffice/skill/edit/{id}", name="backoffice_skill_edit")
      * @param Request $request

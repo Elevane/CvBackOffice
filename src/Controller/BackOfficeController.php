@@ -6,6 +6,7 @@ use App\Entity\Skill;
 use App\Form\SkillType;
 use App\Service\ApiService;
 use App\Service\BlogService;
+use App\Service\MessageService;
 use App\Service\ProjectService;
 use App\Service\SkillService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,9 +20,9 @@ class BackOfficeController extends BaseBackOfficeController
 {
 
 
-    public function __construct(ApiService $service, SecurityController $security,SkillService $skillService, ProjectService $projectService, BlogService $blogService)
+    public function __construct(ApiService $service, SecurityController $security,SkillService $skillService, ProjectService $projectService, BlogService $blogService, MessageService $messageService)
     {
-        parent::__construct($service, $security, $skillService,$projectService, $blogService);
+        parent::__construct($service, $security, $skillService,$projectService, $blogService, $messageService);
 
     }
 
@@ -37,6 +38,8 @@ class BackOfficeController extends BaseBackOfficeController
         $skills = $this->skillservice->getSkills();
         $projects = $this->projectService->getProjects();
         $blogs = $this->blogService->getBlogs();
+        $messages = $this->messageService->getMessages();
+
         if (count($blogs) < 1 && count($projects) < 1 && count($skills) < 1) {
             $status = false;
         }
@@ -45,7 +48,7 @@ class BackOfficeController extends BaseBackOfficeController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->service->newSkill($skill);
+            $this->skillservice->newSkill($skill);
             return $this->redirectToRoute("backoffice_index");
         }
         return $this->render('backoffice/index.html.twig', [
@@ -53,6 +56,7 @@ class BackOfficeController extends BaseBackOfficeController
             'skills' => $skills,
             'projects' => $projects,
             'api_status' => $status,
+            'messages'=> $messages,
             'form' => $form->createView(),
 
         ]);

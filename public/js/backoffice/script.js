@@ -1,3 +1,5 @@
+
+//récupération des éléments récurents
 const valeurDuRange = document.getElementById('valeurDuRange')
 const range = document.getElementById('range')
 let hiddenskills = document.getElementById('project_skills')
@@ -5,12 +7,12 @@ let select_skill = document.getElementById('skills_add')
 const skills_button_list = document.getElementById("skills_buttons")
 
 
-//la valeur des ratio est proportionné
-document.addEventListener('input', range,  function(){
-    valeurDuRange.innerHTML = this.value
-    document.getElementById('skill_ratio').value = this.value * 5
-});
-
+//la valeur des ratio est proportionné et palcé dans l'input caché
+function handleRangeInput(value){
+    valeurDuRange.innerHTML = value
+    document.getElementById('skill_ratio').value = value
+    console.log(document.getElementById('skill_ratio').value)
+}
 
 // ajout des bouton des skills qui existent déja sur ce project
 // suppresion des option du select qui ne peuvent être choisies car déja choisies.

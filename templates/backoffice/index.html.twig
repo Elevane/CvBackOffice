@@ -30,8 +30,8 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.name }}</td>
-                            <td id="rangeTd" style="color:black;"><input type="range" min="0" max="5" step="1" value="{{ t.ratio / 5 }}" disabled> <p>{{ t.ratio / 5 }}</p></td>
-                            <td style="color:black;"><input type="checkbox" id="{{ t.id }}"
+                            <td id="rangeTd" style="color:black;"><input type="range" min="0" max="100" step="5" value="{{ t.ratio  }}" disabled> <p>{{ t.ratio  }}</p></td>
+                            <td style="color:black;"><input disabled type="checkbox" id="{{ t.id }}"
                                         {% if  t.active == 1  %}
                                             checked
                                         {% endif %}
@@ -54,7 +54,7 @@
                         </td>
                         <td id="rangeTd">
                             <div style="display: none">{{ form_widget(form.ratio) }}</div>
-                            <input id="range" type="range" min="0" max="5" step="1" value="0">
+                            <input oninput="handleRangeInput(this.value)" id="range" type="range" min="0" max="100" step="1" value="0">
                             <p id="valeurDuRange">0</p>
                         </td>
                         <td>
@@ -136,7 +136,38 @@
                 <a class="backoffice_index_button_new"href="{{ path('backoffice_blog_new') }}">Ajouter</a>
             </article>
         </section>
+        <section id="bo_messages" class="bo_sections">
+            <h2> Messages</h2>
+            <article>
+                <table  cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>title</th>
+                        <th>message</th>
+                        <th>outils</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in messages %}
+                        <tr>
+                            <td style="color:black;">{{ t.id }}</td>
+                            <td style="color:black;">{{ t.name }}</td>
+                            <td style="color:black;">{{ t.email }}</td>
+                            <td style="color:black;">{{ t.title }}</td>
+                            <td style="color:black;">{{ t.message }}</td>
+                            <td>
+                                <a href="{{ path('backoffice_message_delete', { id :  t.id }) }}" class="delBtn"><img alt="image_del_button" src="css/img/del.png"></a></td>
+                        </tr>
 
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </article>
+        </section>
             <a id="btnDc" href="{{ path('backoffice_logout') }}">deconnecter</a>
 
     </section>

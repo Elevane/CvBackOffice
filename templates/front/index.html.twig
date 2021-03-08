@@ -18,18 +18,13 @@
                 <li id="acontact" class="menu">
                     <a>Contact</a>
                 </li>
-
             </ul>
-
         </nav>
     </section>
     <section id="body">
         <section id="about">
-
             <h1>Web Developer</h1>
             <article>
-
-
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a mauris at nulla bibendum aliquet ut ac
                     erat. Sed et gravida lorem. Morbi dolor nulla, porttitor ut molestie quis, sagittis vitae augue.
                     Nullam
@@ -42,13 +37,10 @@
                     ac ligula laoreet, ut euismod libero maximus. Maecenas at lacus magna. Donec efficitur nulla in dui
                     malesuada facilisis. Duis a velit eget dui imperdiet lobortis a eget nunc.
                 </p>
-
             </article>
             <a id="contactmebtn">Contact Me</a>
         </section>
-
         <div class="trait"></div>
-
 
         <!-- SKILLS -->
         <section id="skills">
@@ -57,18 +49,17 @@
                 <ul>
                     {% for i in skills %}
                         <li class="ratioSkill" data-percent="{{ i.ratio }}">
-                            <h6>{{ i.name }}</h6>
-                            <div></div>
+                            {% if  i.ratio > 50  %}
+                            <div style=" width: 800px;background: linear-gradient(to right, #0b090a {{ i.ratio }}%, #f0efeb {{ 100 - i.ratio }}%)">{{ i.name }} </div>
+                            {% else %}
+                                <div style=" width: 800px;background: linear-gradient(to left, #f0efeb {{ 100 - i.ratio }}%, #0b090a {{  i.ratio }}%)">{{ i.name }} </div>
+                            {% endif %}
+                            <p>{{ i.ratio  }} %</p>
                         </li>
                     {% endfor %}
-
-
                 </ul>
-
-
             </article>
         </section>
-
 
         <!-- PROJECTS -->
         <div class="trait"></div>
@@ -83,27 +74,17 @@
                         <button id="{{ i.name }}" class="filter_buttons unativeButton btnT button {{ i.name }}" data-filter="*.{{ i.name }}">{{ i.name }}</button>
                     </li>
                 {% endfor %}
-
             </ul>
-
             <article>
-
-
                 <ul class="ulpro">
-
-
                     {% for i in projects %}
-                        <a class="pro element-item {{ i.skills }}" data-category="">
+                        <a  class="cards_pro pro element-item {{ i.skills }}" data-category="">
                             <img class="" src="{{ i.image }}" alt="photoProject">
+                            <p hidden> {{ i.name }}</p>
                         </a>
                     {% endfor %}
-
-
                 </ul>
-
             </article>
-            </article>
-
         </section>
 
         <div class="trait"></div>
@@ -122,31 +103,17 @@
                 {% endfor %}
 
             </article>
-
-
+<!----FOOTER--->
         </section>
         <div class="trait"></div>
         <section id="contact">
             <h1>Contact me</h1>
+            {{ form_start(message_form) }}
 
-            <form class="form-style-4" action="" method="post">
-                <label for="field1">
-                    <span>Enter Your Name</span><input type="text" name="field1" required="true"/>
-                </label>
-                <label for="field2">
-                    <span>Email Address</span><input type="email" name="field2" required="true"/>
-                </label>
-                <label for="field3">
-                    <span>Short Subject</span><input type="text" name="field3" required="true"/>
-                </label>
-                <label for="field4">
-                    <span>Message to Us</span><textarea name="field4" onkeyup="adjust_textarea(this)"
-                                                        required="true"></textarea>
-                </label>
-                <label>
-                    <span> </span><input type="submit" value="Send Letter"/>
-                </label>
-            </form>
+
+
+            {{ form_end(message_form) }}
+
         </section>
 
         <footer>
@@ -162,9 +129,8 @@
 
             </article>
             <p>Made by Bastien AUBRY</p>
-            <a target="blank" class="imgRs" id="admin" href="{{ path('backoffice_login') }}"><img src="css/img/gear.png"
-                                                                                                  alt="instaga_logo"></a>
-
+            <a target="blank" class="imgRs" id="admin" href="{{ path('backoffice_login') }}"><img src="css/img/edit.png"
+                                                                                                  alt="instaga_logo"></a
         </footer>
     </section>
 {% endblock %}

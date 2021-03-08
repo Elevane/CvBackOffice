@@ -6,27 +6,31 @@
     <section id="body">
         <h1>Back office</h1>
         <section class=" bo_edit">
-            <h2>{{ title }}</h2>
+            <h2 class="backoffice_edit_h2">{{ title }}</h2>
             {{ form_start(editform) }}
-            <div class="divEditForm">
+            <div class="backoffice_edit_div_name">
                 {{ form_label(editform.name) }}
                 {{ form_widget(editform.name) }}
             </div>
 
-            <div  class="divEditForm">
+            <div  class="backoffice_edit_div_range">
                 {{ form_label(editform.ratio) }}
                 <div style="display: none">{{ form_widget(editform.ratio) }}</div>
-                <input id="range" type="range" value="{{ editform.vars.value.ratio / 5 }}" min="0" max="5" step="1">
+                <input id="range" oninput="handleRangeInput(this.value)" type="range" value="{{ editform.vars.value.ratio / 5 }}" min="0" max="100" step="5">
                 <p id="valeurDuRange">{{ editform.vars.value.ratio / 5 }}</p>
             </div>
 
-            <div id="checkboxEdit">
+            <div class="backoffice_edit_div_active">
                 {{ form_label(editform.active) }}
                 {{ form_widget(editform.active) }}
             </div>
 
 
-            {{ form_widget(editform.submit) }}
+
+            <div class="backoffice_edit_div_buttons">
+                <button><a href="{{ path('backoffice_index') }}">Annuler</a></button>
+                {{ form_widget(editform.submit) }}
+            </div>
 
             {{ form_end(editform) }}
         </section>

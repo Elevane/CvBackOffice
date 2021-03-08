@@ -5,6 +5,15 @@
         <section class=" bo_edit">
             <h2 class="backoffice_edit_h2">{{ title }}</h2>
             {{ form_start(form) }}
+            <div class="backoffice_edit_div_name">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+
+            <div class="backoffice_edit_div_link">
+                {{ form_label(form.link) }}
+                {{ form_widget(form.link) }}
+            </div>
             <div hidden >{{ form_widget(form.skills) }}</div>
             <div class="backoffice_edit_div_skills">
                 <label for="skills_add">Skills</label>
@@ -22,10 +31,7 @@
                 {{ form_widget(form.image) }}
 
             </div>
-            <div class="backoffice_edit_div_name">
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-            </div>
+
             <div class="backoffice_edit_div_buttons">
                 <button><a href="{{ path('backoffice_index') }}">Annuler</a></button>
                 {{ form_widget(form.submit) }}

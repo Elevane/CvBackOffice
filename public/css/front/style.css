@@ -28,7 +28,7 @@ IMPORTS
 }
 html{
 
-    background-color:RGB(0,0,0);
+    background-color: #0b090a;
 }
 body{
     height: 100%;
@@ -69,7 +69,7 @@ nav{
     display: flex;
     justify-content: flex-end;
     align-content: space-around;
-    background-color: RGB(0,0,0,0.9);
+    background-color: #0b090a;
 }
 
 li > a > img{
@@ -77,11 +77,7 @@ li > a > img{
     height: 15px;
 }
 a{
-
     text-decoration: none;
-    color: RGB(255,255,255, 0.7);
-
-
 }
 
 .trait{
@@ -150,11 +146,10 @@ nav li{
 /**/
 
 #skills{
-    height: 885px;
+    height: auto;
     width: 80%;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     }
 #skills article{
@@ -162,22 +157,30 @@ nav li{
     height: 60%;
     margin-top: 30px;
 }
+
 #skills article ul{
     width: 100%;
     height: 100%;
     list-style: none;
     display: flex;
+    align-content: space-around;
+    justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
 }
 #skills article ul li{
     margin-bottom:45px ;
     display: flex;
+    align-items: center;
 }
 #skills .ratioSkill div{
     margin-left: 30px;
-    border: 1px solid white;
+    padding: 3px;
+    border: 1px solid #f0efeb;
+}
 
+.ratioSkill p{
+    margin-left: 10px;
 }
 
 
@@ -186,13 +189,11 @@ nav li{
 }
 /********/
 #projects{
-
-    height: 910px;
+    height: auto;
     width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 
 }
 
@@ -201,9 +202,8 @@ nav li{
     width: 250px;
     height: 300px;
     margin: 30px;
-    border: 3px solid white;
-    border-radius: 3px;
-
+    border: 1px solid #f0efeb;
+    border-radius: 1px;
 }
 
 #quicksearch{
@@ -213,7 +213,6 @@ nav li{
 #projects article{
     width: 100%;
     height: 100%;
-   overflow: hidden;
 }
 #projects > ul {
     display: flex;
@@ -234,53 +233,42 @@ nav li{
 
 }
 
-
-#showmorepro{
-    border: none;
-    background-color: black;
-    display: flex;
-     flex-direction: column;
-     align-items: center;
-     font-size: 15px;
-     margin-top: 30px;
-     width: 100%;
-}
-
-#showmorepro img
-{
-    border: none;
-    margin: 10px;
-    width: 20px;
-    height: 20px;
-}
 /***                              */
 
 #blog{
 
-    height: 885px;
+    height:auto;
     width: 85%;
     display: flex;
     flex-direction: column;
-
+    justify-content: flex-start;
     align-items: center;
 
-}
-#blog > article{
-    overflow: hidden;
 }
 #blog img{
     width: 250px;
     height: 300px;
     margin: 30px;
-    border: 3px solid white;
+    border: 1px solid #f0efeb;
     border-radius: 3px;
-
+}
+.cards_pro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#blog > article{
+    width: 80%;
 }
 #blog article article{
     display: flex;
     align-items: center;
+
     margin-bottom: 50px;
 
+}
+#blog article article p {
+    text-align: justify;
 }
 #blog article article p,#blog h3{
 
@@ -288,7 +276,9 @@ nav li{
 
 
 }
-
+#blog h3{
+    font-size: 25px;
+}
 #blog #showmoreblog img{
     border: none;
     width: 40px;
@@ -306,88 +296,89 @@ nav li{
     justify-content: space-around;
     align-items: center;
 }
-.form-style-4{
+form{
     width: 450px;
     font-size: 16px;
-    background: black;
+    background: #0b090a;
     padding: 30px 30px 15px 30px;
-    border: 5px solid white;
+    border: 5px solid #f0efeb;
 }
-.form-style-4 input[type=submit],
-.form-style-4 input[type=button],
-.form-style-4 input[type=text],
-.form-style-4 input[type=email],
-.form-style-4 textarea,
-.form-style-4 label
+form button[type=submit],
+form input[type=button],
+form input[type=text],
+form input[type=email],
+form textarea,
+form label
 {
     font-family: Tomorrow, "Times New Roman", Times, serif;
     font-size: 16px;
     color: #fff;
 
 }
-.form-style-4 label {
+form label {
     display:block;
     margin-bottom: 10px;
 }
-.form-style-4 label > span{
+form label > span{
     display: inline-block;
     float: left;
     width: 150px;
 }
-.form-style-4 input[type=text],
-.form-style-4 input[type=email]
+form input[type=text],
+form input[type=email]
 {
     background: transparent;
     border: none;
-    border-bottom: 1px dashed white;
+    border-bottom: 1px dashed #f0efeb;
     width: 275px;
     outline: none;
     padding: 0px 0px 0px 0px;
     font-style: italic;
 }
-.form-style-4 textarea{
+form textarea{
     font-style: italic;
     padding: 0px 0px 0px 0px;
     background: transparent;
     outline: none;
     border: none;
-    border-bottom: 1px dashed white;
+    border-bottom: 1px dashed #f0efeb;
     width: 275px;
     overflow: hidden;
     resize:none;
     height:20px;
 }
 
-.form-style-4 textarea:focus,
-.form-style-4 input[type=text]:focus,
-.form-style-4 input[type=email]:focus,
-.form-style-4 input[type=email] :focus
+form textarea:focus,
+form input[type=text]:focus,
+form input[type=email]:focus,
+form input[type=email] :focus
 {
-    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed #0b090a;
 }
 
-.form-style-4 input[type=submit],
-.form-style-4 input[type=button]{
-    background: black;
-    border: 1px solid white;
+form button[type=submit],
+form input[type=button]{
+    background: #0b090a;
+    border: 1px solid #f0efeb;
     padding: 8px 10px 8px 10px;
     border-radius: 5px;
-    color: white;
+    color: #f0efeb;
 }
-.form-style-4 input[type=submit]:hover,
-.form-style-4 input[type=button]:hover{
-    background: white;
-    color: black;
+form button[type=submit]:hover,
+form input[type=button]:hover{
+    background: #f0efeb;
+    color: #0b090a;
 }
 footer{
     width: 100%;
     height: 160px;
-    background-color: RGB(32,38,46);
+    background-color:#0f0f0f;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
+
 .imgRs img{
     width: 50px;
     height: 50px;
@@ -396,21 +387,21 @@ footer{
     opacity: 0.5;
 }
 .ativeButton{
-    color:black;
-    background-color: antiquewhite;
-    border: 1px solid white;
+    color:#0b090a;
+    background-color: #f0efeb;
+    border: 1px solid #f0efeb;
     padding: 3px;
    }
 
 .unativeButton{
-    color:white;
-    background-color: black;
-    border: 1px solid white;
+    color:#f0efeb;
+    background-color: #0b090a;
+    border: 1px solid #f0efeb;
     padding: 3px;
 }
 .bo_sections{
     width: 70%;
-    height: 100%;
+    height: auto;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -433,5 +424,8 @@ footer{
     padding: 0.5%;
     width: 100%;
     height: 20%;
-    background: white;
+    background: #f0efeb;
 }
+
+
+

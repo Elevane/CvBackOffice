@@ -60,7 +60,9 @@ class BlogController extends BaseBackOfficeController{
         $api_blog = $this->blogService->getBlog($id);
         if($api_blog){
             $blog ->setId($api_blog['id']);
-            $blog ->setImage(new File($api_blog['image']));
+            if(!empty($api_blog['image'])){
+                $blog ->setImage(new File($api_blog['image']));
+            }
             $blog ->setDate(new DateTime($api_blog['date']));
             $blog ->setText($api_blog['text']);
             $blog->setTitle($api_blog['title']);

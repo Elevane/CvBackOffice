@@ -17,14 +17,12 @@ use Symfony\Component\Serializer\Serializer;
 class ApiService{
 
     private $client;
-    private $endpoint;
     private $serializer;
 
 
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
-        $this->endpoint = getenv(Constants::APIENDPOINT);
 
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];

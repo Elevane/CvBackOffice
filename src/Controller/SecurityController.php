@@ -40,6 +40,7 @@ class SecurityController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
 
                 if ($this->checkCredentials($user)) {
+
                     $this->AddUserTosession($user);
                     return $this->redirectToRoute('backoffice_index');
 

@@ -3,9 +3,9 @@
 
     <section id="body">
         <h1>Back office
-            {%  if api_status == false %}
+            {% if api_status == false %}
                 <span style="color: red" id="dot">.</span>
-            {%  else %}
+            {% else %}
                 <span style="color: green" id="dot">.</span>
             {% endif %}
 
@@ -14,7 +14,7 @@
         <section id="bo_skills" class="bo_sections">
             <h2> Skills</h2>
             <article>
-                <table  cellspacing="0" cellpadding="0">
+                <table cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -30,16 +30,20 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.name }}</td>
-                            <td id="rangeTd" style="color:black;"><input type="range" min="0" max="100" step="5" value="{{ t.ratio  }}" disabled> <p>{{ t.ratio  }}</p></td>
+                            <td id="rangeTd" style="color:black;"><input type="range" min="0" max="100" step="5"
+                                                                         value="{{ t.ratio }}" disabled>
+                                <p>{{ t.ratio }}</p></td>
                             <td style="color:black;"><input disabled type="checkbox" id="{{ t.id }}"
-                                        {% if  t.active == 1  %}
+                                        {% if  t.active == 1 %}
                                             checked
                                         {% endif %}
                                 >
                             </td>
                             <td>
-                                <a href="{{ path('backoffice_skill_edit', { id :  t.id }) }}" class="editBtn"><img  alt="image_edit_button" src="css/img/edit.png"></a>
-                                <a href="{{ path('backoffice_skill_delete', { id :  t.id }) }}" class="delBtn"><img  alt="image_del_button" src="css//img/del.png"></a>
+                                <a href="{{ path('backoffice_skill_edit', { id :  t.id }) }}" class="editBtn"><img
+                                            alt="image_edit_button" src="css/img/edit.png"></a>
+                                <a href="{{ path('backoffice_skill_delete', { id :  t.id }) }}" class="delBtn"><img
+                                            alt="image_del_button" src="css//img/del.png"></a>
                             </td>
 
 
@@ -50,17 +54,18 @@
                         {{ form_start(form) }}
                         <td style="color:black;">Ajout</td>
                         <td>
-                           {{ form_widget(form.name) }}
+                            {{ form_widget(form.name) }}
                         </td>
                         <td id="rangeTd">
                             <div style="display: none">{{ form_widget(form.ratio) }}</div>
-                            <input oninput="handleRangeInput(this.value)" id="range" type="range" min="0" max="100" step="1" value="0">
+                            <input oninput="handleRangeInput(this.value)" id="range" type="range" min="0" max="100"
+                                   step="1" value="0">
                             <p id="valeurDuRange">0</p>
                         </td>
                         <td>
                             {{ form_widget(form.active) }}
                         </td>
-                        <td >
+                        <td>
                             {{ form_widget(form.submit, { 'label': '+' }) }}
                         </td>
                         {{ form_end(form) }}
@@ -74,7 +79,7 @@
         <section id="bo_projects" class="bo_sections">
             <h2> Projects</h2>
             <article>
-                <table  cellspacing="0" cellpadding="0">
+                <table cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -89,10 +94,14 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.name }}</td>
-                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_project" class="backoffice_index_img"src="{{ t.image }}"></td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_project"
+                                                                                          class="backoffice_index_img"
+                                                                                          src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.skills }}</td>
-                            <td><a href="{{ path('backoffice_project_edit', { id :  t.id }) }}" class="editBtn"><img alt="image_edit_button" src="css/img/edit.png"></a>
-                            <a href="{{ path('backoffice_project_delete', { id :  t.id }) }}" class="delBtn"><img alt="image_del_button" src="css/img/del.png"></a></td>
+                            <td><a href="{{ path('backoffice_project_edit', { id :  t.id }) }}" class="editBtn"><img
+                                            alt="image_edit_button" src="css/img/edit.png"></a>
+                                <a href="{{ path('backoffice_project_delete', { id :  t.id }) }}" class="delBtn"><img
+                                            alt="image_del_button" src="css/img/del.png"></a></td>
                         </tr>
 
                     {% endfor %}
@@ -105,7 +114,7 @@
         <section id="bo_blogs" class="bo_sections">
             <h2> Blogs</h2>
             <article>
-                <table  cellspacing="0" cellpadding="0">
+                <table cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -121,25 +130,29 @@
                         <tr>
                             <td style="color:black;">{{ t.id }}</td>
                             <td style="color:black;">{{ t.title }}</td>
-                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_blog" class="backoffice_index_img"src="{{ t.image }}"></td>
+                            <td class="backoffice_index_td_img" style="color:black;"><img alt="image_blog"
+                                                                                          class="backoffice_index_img"
+                                                                                          src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.date |format('Y-m-d') }}</td>
                             <td style="color:black;">{{ t.text }}</td>
                             <td>
-                                <a href="{{ path('backoffice_blog_edit', { id :  t.id }) }}" class="editBtn"><img  alt="image_edit_button" src="css/img/edit.png"></a>
-                                <a href="{{ path('backoffice_blog_delete', { id :  t.id }) }}" class="delBtn"><img  alt="image_del_button" src="css/img/del.png"></a>
+                                <a href="{{ path('backoffice_blog_edit', { id :  t.id }) }}" class="editBtn"><img
+                                            alt="image_edit_button" src="css/img/edit.png"></a>
+                                <a href="{{ path('backoffice_blog_delete', { id :  t.id }) }}" class="delBtn"><img
+                                            alt="image_del_button" src="css/img/del.png"></a>
                             </td>
                         </tr>
 
                     {% endfor %}
                     </tbody>
                 </table>
-                <a class="backoffice_index_button_new"href="{{ path('backoffice_blog_new') }}">Ajouter</a>
+                <a class="backoffice_index_button_new" href="{{ path('backoffice_blog_new') }}">Ajouter</a>
             </article>
         </section>
         <section id="bo_messages" class="bo_sections">
             <h2> Messages</h2>
             <article>
-                <table  cellspacing="0" cellpadding="0">
+                <table cellspacing="0" cellpadding="0">
                     <thead>
                     <tr>
                         <th>id</th>
@@ -157,9 +170,14 @@
                             <td style="color:black;">{{ t.name }}</td>
                             <td style="color:black;">{{ t.email }}</td>
                             <td style="color:black;">{{ t.title }}</td>
-                            <td style="color:black;">{{ t.message }}</td>
+                            <td style="color:black; display: block; width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ t.message }}</td>
                             <td>
-                                <a href="{{ path('backoffice_message_delete', { id :  t.id }) }}" class="delBtn"><img alt="image_del_button" src="css/img/del.png"></a></td>
+                                <a href="{{ path('backoffice_message_delete', { id :  t.id }) }}" class="delBtn"><img
+                                            alt="image_del_button" src="css/img/del.png"></a>
+                                <a href="{{ path('backoffice_message_show', { id :  t.id }) }}" class="delBtn"><img
+                                            alt="image_show_button" src="css/img/show.png"></a>
+                            </td>
+
                         </tr>
 
                     {% endfor %}
@@ -168,7 +186,7 @@
 
             </article>
         </section>
-            <a id="btnDc" href="{{ path('backoffice_logout') }}">deconnecter</a>
+        <a id="btnDc" href="{{ path('backoffice_logout') }}">deconnecter</a>
 
     </section>
 

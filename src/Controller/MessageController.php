@@ -32,4 +32,20 @@ class MessageController extends BaseBackOfficeController
         return $this->redirectToRoute('backoffice_index');
     }
 
+
+
+    /**
+     * @Route("/backoffice/message/show/{id}", name="backoffice_message_show")
+     * @param int $id
+     * @return Response
+     */
+    public function showAction(int $id): Response
+    {
+        $message = $this->messageService->getMessage($id);
+        return $this->render('backoffice/message/show.html.twig', [
+            'message' => $message,
+            'title' => "Message"
+    ]);
+    }
+
 }

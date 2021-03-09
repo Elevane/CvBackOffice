@@ -1,0 +1,35 @@
+{% extends 'base_backoffice.html.twig' %}
+{% block body %}
+    <section id="body">
+        <h1>Back office</h1>
+        <section class=" bo_edit">
+            <h2 class="backoffice_edit_h2">{{ title }}</h2>
+            <article class="message_show">
+
+                <div >
+                    <label>Name : </label>
+                    <p>{{ message.name }}</p>
+                </div>
+                <div >
+                    <label>Title : </label>
+                    <p>{{ message.title }}</p>
+                </div>
+                <div>
+                    <label>Email : </label>
+                    <p>{{ message.email }}</p>
+                </div>
+                <div>
+                    <label>Name : </label>
+                    <p>{{ message.message }}</p>
+                </div>
+
+
+                    <button id="retour_message"><a href="{{ path('backoffice_index') }}">Retour</a></button>
+
+            </article>
+
+
+        </section>
+
+    </section>
+{% endblock %}

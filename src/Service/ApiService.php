@@ -97,7 +97,7 @@ class ApiService{
         try {
             $response = $this->client->request(
                 'GET',
-                Constants::APIENDPOINT. $entity
+                Constants::APIENDPOINT. $entity. "/"
             );
 
             $statusCode = $response->getStatusCode();
@@ -109,9 +109,12 @@ class ApiService{
             $content = $response->toArray();
             // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
         } catch (\Throwable $th) {
-            throw $th;
+
+            return $content;
+
         }
-        return $content;
+
+        return $content['data'];
     }
     public function patch($entity, $obj){
         try {
@@ -160,13 +163,13 @@ class ApiService{
 
     public function getUserByUsername($user)
     {
+
         try {
             $response = $this->client->request(
                 'POST',
-                Constants::APIENDPOINT."/getuser",[
-                'json' => ['username' => $user->getLogin(), 'password' => $user->getPassword() ]]
+                Constants::APIENDPOINT."user/getuser",[
+                'json' => ['email' => $user->getLogin(), 'password' => $user->getPassword() ]]
             );
-
             $statusCode = $response->getStatusCode();
         // $statusCode = 200
         $contentType = $response->getHeaders()['content-type'][0];
@@ -174,11 +177,12 @@ class ApiService{
         $content = $response->getContent();
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
        
-        $array = $response->toArray();
+        $array = $response;
 
 
         } catch (\Throwable $th) {
            $res =  "Could not connect to the server";
+
            return $res;
         }
 
@@ -189,6 +193,7 @@ class ApiService{
         else{
             $res = true;
         }
+
         return $res;
     }
 

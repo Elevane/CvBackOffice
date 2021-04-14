@@ -6,7 +6,7 @@ namespace App\Entity;
 
 class Skill
 {
-    const NAME = "Skill";
+    const NAME = "skill";
     private $id;
     private $name;
     private $ratio;

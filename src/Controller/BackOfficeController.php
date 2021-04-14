@@ -51,6 +51,8 @@ class BackOfficeController extends BaseBackOfficeController
             $this->skillservice->newSkill($skill);
             return $this->redirectToRoute("backoffice_index");
         }
+
+
         return $this->render('backoffice/index.html.twig', [
             'blogs' => $blogs,
             'skills' => $skills,

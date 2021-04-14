@@ -255,7 +255,7 @@ article table{
     margin-right: 15%;
 }
 .backoffice_edit_div_password label{
-    margin-right: 7%;
+    margin-right: 9%;
 }
 .backoffice_edit_div_date label{
     margin-right: 4.5%;
@@ -327,7 +327,8 @@ article table{
     color:  #264653;
 }
 
-input[type=text], select {
+
+input[type=text], select , input[type=password]{
     width: 35%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -336,7 +337,18 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+.backoffice_edit_div_description textarea {
+    height: 200px;
+    width: 50%;
+}
+.backoffice_edit_div_description{
+    display: flex;
+    margin-top: 1%;
+    width: 100%;
+}
+.backoffice_edit_div_description label{
+    padding-right: 1.5%;
+}
 #add_skill{
     width: 5%;
 }
@@ -391,7 +403,6 @@ input[type=text], select {
     border-top-right-radius: 10px;
 }
 .backoffice_edit_div_login input, .backoffice_edit_div_password input{
-
     width: 50%;
 }
 #login_eroor{
@@ -413,4 +424,13 @@ input[type=text], select {
 #blog_date_day{
     width: 15%;
     margin-right: 1%;
+}
+
+
+.overflow_text{
+    white-space: nowrap;
+    width: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #000000;
 }

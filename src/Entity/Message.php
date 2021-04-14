@@ -6,7 +6,7 @@ namespace App\Entity;
 
 class Message
 {
-    const NAME = "Message";
+    const NAME = "message";
     private $title;
     private  $message;
     private $name;

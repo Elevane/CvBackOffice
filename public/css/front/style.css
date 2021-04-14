@@ -198,7 +198,7 @@ nav li{
 }
 
 
-#projects img, .bo_sections img{
+#projects div img, .bo_sections img{
     width: 250px;
     height: 300px;
     margin: 30px;
@@ -428,4 +428,25 @@ footer{
 }
 
 
+.description {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    padding-top:50%;
+    margin: 5%;
+    left: 0;
+    right: 0;
+    background: rgb(0,0,0,0.5);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    text-overflow: unset;
+}
+
+.description {
+    visibility: visible;
+    opacity: 1;
+}
 

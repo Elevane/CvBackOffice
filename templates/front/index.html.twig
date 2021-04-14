@@ -25,17 +25,7 @@
         <section id="about">
             <h1>Web Developer</h1>
             <article>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a mauris at nulla bibendum aliquet ut ac
-                    erat. Sed et gravida lorem. Morbi dolor nulla, porttitor ut molestie quis, sagittis vitae augue.
-                    Nullam
-                    erat risus, mattis sit amet ante vitae, efficitur eleifend mi. Nam fringilla venenatis accumsan.
-                    Phasellus ut fermentum neque, in ultrices lorem. Curabitur ultricies purus et lorem lobortis
-                    pellentesque. Phasellus justo diam, imperdiet placerat eleifend eget, facilisis sed nisl. Phasellus
-                    ac
-                    iaculis velit. Vestibulum dictum tellus magna, vitae laoreet neque pretium sit amet. Nullam mattis
-                    orci
-                    ac ligula laoreet, ut euismod libero maximus. Maecenas at lacus magna. Donec efficitur nulla in dui
-                    malesuada facilisis. Duis a velit eget dui imperdiet lobortis a eget nunc.
+                <p>Always passionate about IT, I took the leap three years ago by starting my studies in IT development. More than ever decided to make it my job, I work here and there on web and mobile projects but also video games.
                 </p>
             </article>
             <a id="contactmebtn">Contact Me</a>
@@ -47,16 +37,18 @@
             <h1>skills</h1>
             <article>
                 <ul>
-                    {% for i in skills %}
-                        <li class="ratioSkill" data-percent="{{ i.ratio }}">
-                            {% if  i.ratio > 50  %}
-                            <div style=" width: 800px;background: linear-gradient(to right, #0b090a {{ i.ratio }}%, #f0efeb {{ 100 - i.ratio }}%)">{{ i.name }} </div>
-                            {% else %}
-                                <div style=" width: 800px;background: linear-gradient(to left, #f0efeb {{ 100 - i.ratio }}%, #0b090a {{  i.ratio }}%)">{{ i.name }} </div>
-                            {% endif %}
-                            <p>{{ i.ratio  }} %</p>
-                        </li>
-                    {% endfor %}
+                    {% if skills %}
+                        {% for i in skills %}
+                            <li class="ratioSkill" data-percent="{{ i.ratio }}">
+                                {% if  i.ratio > 50  %}
+                                <div style=" width: 800px;background: linear-gradient(to right, #0b090a {{ i.ratio }}%, #f0efeb {{ 100 - i.ratio }}%)">{{ i.name }} </div>
+                                {% else %}
+                                    <div style=" width: 800px;background: linear-gradient(to left, #f0efeb {{ 100 - i.ratio }}%, #0b090a {{  i.ratio }}%)">{{ i.name }} </div>
+                                {% endif %}
+                                <p>{{ i.ratio  }} %</p>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
             </article>
         </section>
@@ -79,8 +71,11 @@
                 <ul class="ulpro">
                     {% for i in projects %}
                         <a  class="cards_pro pro element-item {{ i.skills }}" data-category="">
-                            <img class="" src="{{ i.image }}" alt="photoProject">
-                            <p hidden> {{ i.name }}</p>
+                            <div>
+                                <img class="" src="{{ i.image }}" alt="photoProject">
+                                <p class="description">{{ i.description }}</p>
+                            </div>
+
                         </a>
                     {% endfor %}
                 </ul>
@@ -122,7 +117,7 @@
                             src="css/img/Linkedin_5.png" alt="linkedin_logo"></a>
                 <a target="blank" class="imgRs" href="https://github.com/Elevane?tab=repositories"><img
                             src="css/img/Github_5.png" alt="github_logo"></a>
-                <a target="blank" class="imgRs" href="https://twitter.com/bastienaubry"><img src="css/img/Twitter_5.png"
+                <a target="blank" class="imgRs" href="https://twitter.com/b_astien_aubry"><img src="css/img/Twitter_5.png"
                                                                                              alt="twitter_logo"></a>
                 <a target="blank" class="imgRs" href="https://www.instagram.com/?hl=fr"><img
                             src="css/img/Instagram_5.png" alt="instaga_logo"></a>

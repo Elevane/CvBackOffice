@@ -10,10 +10,6 @@
                 {{ form_widget(form.name) }}
             </div>
 
-            <div class="backoffice_edit_div_link">
-                {{ form_label(form.link) }}
-                {{ form_widget(form.link) }}
-            </div>
             <div hidden >{{ form_widget(form.skills) }}</div>
             <div class="backoffice_edit_div_skills">
                 <label for="skills_add">Skills</label>
@@ -25,7 +21,11 @@
                 </select>
                 <div id="skills_buttons"></div>
             </div>
+            <div class="backoffice_edit_div_description">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
 
+            </div>
             <div class="backoffice_edit_div_image">
                 {{ form_label(form.image) }}
                 {{ form_widget(form.image) }}

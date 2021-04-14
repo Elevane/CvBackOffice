@@ -6,11 +6,29 @@ namespace App\Entity;
 
 class Project
 {
-    const NAME = "Project";
+    const NAME = "project";
     private $id;
     private $image;
     private $name;
     private $skills;
+    private $description;
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
 
     /**
      * @return mixed
@@ -81,6 +99,7 @@ class Project
              'name' => $this->getName(),
             'skills' => $this->getSkills(),
             'image' => $this->getImage(),
+            'description' => $this->getDescription()
         ];
     }
 
@@ -91,6 +110,7 @@ class Project
             'name' => $this->getName(),
             'skills' => $this->getSkills(),
             'image' => $this->getImage(),
+            'description' => $this->getDescription()
         ];
     }
 

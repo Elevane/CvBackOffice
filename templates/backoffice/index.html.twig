@@ -86,6 +86,7 @@
                         <th>nom</th>
                         <th>image</th>
                         <th>skills</th>
+                        <th>description</th>
                         <th>Outils</th>
                     </tr>
                     </thead>
@@ -98,6 +99,7 @@
                                                                                           class="backoffice_index_img"
                                                                                           src="{{ t.image }}"></td>
                             <td style="color:black;">{{ t.skills }}</td>
+                            <td class="overflow_text">{{ t.description }}</td>
                             <td><a href="{{ path('backoffice_project_edit', { id :  t.id }) }}" class="editBtn"><img
                                             alt="image_edit_button" src="css/img/edit.png"></a>
                                 <a href="{{ path('backoffice_project_delete', { id :  t.id }) }}" class="delBtn"><img
@@ -164,23 +166,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for t in messages %}
-                        <tr>
-                            <td style="color:black;">{{ t.id }}</td>
-                            <td style="color:black;">{{ t.name }}</td>
-                            <td style="color:black;">{{ t.email }}</td>
-                            <td style="color:black;">{{ t.title }}</td>
-                            <td style="color:black; display: block; width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ t.message }}</td>
-                            <td>
-                                <a href="{{ path('backoffice_message_delete', { id :  t.id }) }}" class="delBtn"><img
-                                            alt="image_del_button" src="css/img/del.png"></a>
-                                <a href="{{ path('backoffice_message_show', { id :  t.id }) }}" class="delBtn"><img
-                                            alt="image_show_button" src="css/img/show.png"></a>
-                            </td>
 
-                        </tr>
+                        {% for t in messages %}
+                            <tr>
+                                <td style="color:black;">{{ t.id }}</td>
+                                <td style="color:black;">{{ t.name }}</td>
+                                <td style="color:black;">{{ t.email }}</td>
+                                <td style="color:black;">{{ t.title }}</td>
+                                <td style="color:black; display: block; width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ t.message }}</td>
+                                <td>
+                                    <a href="{{ path('backoffice_message_delete', { id :  t.id }) }}" class="delBtn"><img
+                                                alt="image_del_button" src="css/img/del.png"></a>
+                                    <a href="{{ path('backoffice_message_show', { id :  t.id }) }}" class="delBtn"><img
+                                                alt="image_show_button" src="css/img/show.png"></a>
+                                </td>
 
-                    {% endfor %}
+                            </tr>
+
+                        {% endfor %}
+
                     </tbody>
                 </table>
 

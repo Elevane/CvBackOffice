@@ -70,6 +70,7 @@ class ProjectController extends BaseBackOfficeController{
             $project ->setImage(new File($api_project['image']));
         }
         $project ->setName($api_project['name']);
+        $project ->setDescription($api_project['description']);
         $project ->setSkills($api_project['skills']);
 
         $form =$this->createForm(ProjectType::class, $project );
